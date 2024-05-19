@@ -18,4 +18,38 @@ export class UserService {
 
     return this.http.post<User>('http://localhost:4000/users/login', data);
   }
+
+  register(
+    username: string,
+    password: string,
+    forename: string,
+    surname: string,
+    sex: string,
+    type: string,
+    address: string,
+    email: string,
+    contactPhone: number,
+    securityQuestion: string,
+    securityAnswer: string,
+    // profilePicure: any,
+    creditCardNumber: number)
+  {
+    const data= {
+      username: username,
+      password: password,
+      forename: forename,
+      surname: surname,
+      sex: sex,
+      type: type,
+      address: address,
+      email: email,
+      contactPhone: contactPhone,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
+      // profilePicure: profilePicure,
+      creditCardNumber: creditCardNumber,
+    }
+
+    return this.http.post<string>('http://localhost:4000/users/register', data);
+  }
 }

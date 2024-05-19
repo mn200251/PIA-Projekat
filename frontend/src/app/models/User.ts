@@ -7,10 +7,10 @@ export class User{
     type: string = ""
     address: string = ""
     email: string = ""
-    contactPhone: string = ""
+    contactPhone: number | null = null
     securityQuestion: string = ""
     securityAnswer: string = ""
-    profilePicure: File | null = null
+    profilePicure: any | null = null
     creditCardNumber: number = 0
 
     verified: boolean = false

@@ -15,6 +15,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#" (click)="navigateTo(2)">Register</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="navigateTo(3)">Reset password</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -28,9 +31,10 @@
       <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
       <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
   
+      <p class="error">{{error}}</p>
+
       <button (click)="login()">Login</button>
   
-      <p class="error">{{error}}</p>
     </div>
   
     <div id="registerForm" *ngIf="page == 2">
@@ -51,11 +55,74 @@
       <input type="file" name="profilePicure" [(ngModel)]="profilePicure">
       <input type="number" name="creditCardNumber" placeholder="Credit Card Number" [(ngModel)]="creditCardNumber">
   
-      <button (click)="register()">Register</button>
-  
       <p class="error">{{error}}</p>
+
+      <button (click)="register()">Register</button>
     </div>
+
+    <div id="resetForm" *ngIf="page == 3">
+        <h4>Reset password</h4><br>
+    
+        <button (click)="navigateTo(31)">I know my password</button>&nbsp;&nbsp;
+    
+        <button (click)="navigateTo(321)">I forgot my password</button>
+    
+    </div>
+
+    <div id="resetForm" *ngIf="page == 31">
+        <h4>Reset password</h4><br>
+    
+        Old password:
+        <input type="password" name="oldPassword" [(ngModel)]="oldPassword">
+
+        New password:
+        <input type="password" name="newPassword" [(ngModel)]="newPassword">
+
+        Confirm new password:
+        <input type="password" name="confirmNewPassword" [(ngModel)]="confirmNewPassword">
+
+        <p class="error">{{error}}</p>
+
+        <button (click)="resetKnow()">Submit</button>
+    
+    </div>
+
+    <div id="resetForm" *ngIf="page == 321">
+        <h4>Reset password - Step 1</h4><br>
+    
+        Enter your username:
+        <input type="password" name="oldPassword" [(ngModel)]="oldPassword">
+
+        <button (click)="resetDontKnow(1)">Get security question</button>
+    
+    </div>
+
+    <div id="resetForm" *ngIf="page == 322">
+        <h4>Reset password - Step 2</h4><br>
+    
+        "{{securityQuestion}}"
+        <input type="text" name="securityAnswer" [(ngModel)]="securityAnswer">
+
+        <button (click)="resetDontKnow(2)">Submit</button>
+    
+    </div>
+
+    <div id="resetForm" *ngIf="page == 323">
+        <h4>Reset password - Step 3</h4><br>
+    
+        New password:
+        <input type="password" name="newPassword" [(ngModel)]="newPassword">
+
+        Confirm new password:
+        <input type="password" name="confirmNewPassword" [(ngModel)]="confirmNewPassword">
+
+        <button (click)="resetDontKnow(3)">Submit</button>
+    
+    </div>
+
   </div>
+
+
   
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
