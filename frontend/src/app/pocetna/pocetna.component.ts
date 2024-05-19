@@ -92,6 +92,8 @@ export class PocetnaComponent {
 
   register()
   {
+    this.type = "customer"
+
     if (!this.username || !this.password || !this.securityQuestion || !this.securityAnswer ||
       !this.forename || !this.surname || !this.sex || !this.address || !this.contactPhone ||
       !this.email || !this.creditCardNumber) {
