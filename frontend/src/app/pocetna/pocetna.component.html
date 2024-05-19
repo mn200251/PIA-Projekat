@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="navigateTo(0)">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="navigateTo(1)">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="navigateTo(2)">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+  
+    <div id="loginForm" *ngIf="page == 1">
+      <h4>Login</h4>
+  
+      <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
+      <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
+  
+      <button (click)="login()">Login</button>
+  
+      <p class="error">{{error}}</p>
+    </div>
+  
+    <div id="registerForm" *ngIf="page == 2">
+      <h4>Register</h4>
+  
+      <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
+      <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
+      <input type="text" name="securityQuestion" placeholder="Security Question" [(ngModel)]="securityQuestion">
+      <input type="text" name="securityAnswer" placeholder="Answer" [(ngModel)]="securityAnswer">
+      <input type="text" name="forename" placeholder="Forename" [(ngModel)]="forename">
+      <input type="text" name="surname" placeholder="Surname" [(ngModel)]="surname">
+      <div>Sex:</div>
+      <label><input type="radio" value="M" [(ngModel)]="sex"> M</label>&nbsp;
+      <label><input type="radio" value="F" [(ngModel)]="sex"> F</label>
+      <input type="text" name="address" placeholder="Address" [(ngModel)]="address">
+      <input type="tel" name="contactPhone" placeholder="Phone" [(ngModel)]="contactPhone">
+      <input type="email" name="email" placeholder="Email" [(ngModel)]="email">
+      <input type="file" name="profilePicure" [(ngModel)]="profilePicure">
+      <input type="number" name="creditCardNumber" placeholder="Credit Card Number" [(ngModel)]="creditCardNumber">
+  
+      <button (click)="register()">Register</button>
+  
+      <p class="error">{{error}}</p>
+    </div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
