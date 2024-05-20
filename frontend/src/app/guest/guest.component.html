@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(1)">Profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(2)">Restaurants</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(3)">Reservations</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(4)">Food delivery</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<div class="container">
+  
+    <div *ngIf="page == 1">
+      <h4>Profile</h4><br>
+
+        Forename:<br>
+        <input type="text" name="forename" placeholder="Forename" [(ngModel)]="user.forename">
+        
+        Surname:<br>
+        <input type="text" name="surname" placeholder="Surname" [(ngModel)]="user.surname">
+
+        Address:<br>
+        <input type="text" name="address" placeholder="Address" [(ngModel)]="user.address">
+
+        Email:<br>
+        <input type="email" name="email" placeholder="Email" [(ngModel)]="user.email">
+
+        Contact phone:<br>
+        <input type="tel" name="contactPhone" placeholder="Phone" [(ngModel)]="user.contactPhone">
+
+        Credit card number:<br>
+        <input type="number" name="creditCardNumber" placeholder="Credit Card Number" [(ngModel)]="user.creditCardNumber">
+
+        <p class="error">{{error}}</p>
+        <br>
+        <button (click)="updateInfo()">Update info</button>
+    </div>
+
+
+
+</div>
+

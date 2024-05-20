@@ -52,4 +52,28 @@ export class UserService {
 
     return this.http.post<string>('http://localhost:4000/users/register', data);
   }
+
+  updateInfo(
+    username: string,
+    forename: string,
+    surname: string,
+    address: string,
+    email: string,
+    contactPhone: number,
+    // profilePicure: any,
+    creditCardNumber: number)
+  {
+    const data= {
+      username: username,
+      forename: forename,
+      surname: surname,
+      address: address,
+      email: email,
+      contactPhone: contactPhone,
+      // profilePicure: profilePicure,
+      creditCardNumber: creditCardNumber,
+    }
+
+    return this.http.post<string>('http://localhost:4000/users/updateInfo', data);
+  }
 }

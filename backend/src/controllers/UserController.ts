@@ -54,32 +54,43 @@ export class UserController {
 
       await newUser.save();
       return res.json({ msg: 'Sent registration request successfully!' });
+    }
 
+    updateInfo = async (req: express.Request, res: express.Response) => {
+        try {
+            const { username, forename, surname, address, email, contactPhone, creditCardNumber } = req.body;
+        
+            const user = await User.findOne({ username });
+            if (!user) {
+              return res.json({ msg: 'User not found' });
+            }
 
-      User.findOne({ $or: [{ username:username }, { email:email }] }).then((user => {
-        return res.json({ msg: 'User already exists!' });
-      })).catch(err => {
-        // user does not exist, send register request
-
-        const newUser = new User({
-            username,
-            password,
-            forename,
-            surname,
-            sex,
-            type,
-            address,
-            email,
-            contactPhone,
-            securityQuestion,
-            securityAnswer,
-            creditCardNumber,
-            verified,
-          });
-
-          newUser.save();
-          return res.json({ msg: 'Sent registration request successfully!' });
-      })
+            // check if new email is already used by another user
+            const user2 = await User.findOne({ email });
+            if (user2)
+            {
+                if (user2.email != user.email)
+                {
+                    return res.json({ msg: 'New email is already taken!' });
+                }
+            }
+            
+            // Update user information
+            user.forename = forename;
+            user.surname = surname;
+            user.address = address;
+            user.email = email;
+            user.contactPhone = contactPhone;
+            user.creditCardNumber = creditCardNumber;
+        
+            // Save the updated user information
+            await user.save();
+        
+            res.json({ msg: 'User information updated successfully!' });
+          } catch (error) {
+            res.json({ msg: 'An error occurred while updating user information!'});
+          }
+    
     }
 
 

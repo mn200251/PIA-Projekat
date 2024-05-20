@@ -60,28 +60,35 @@ class UserController {
             });
             yield newUser.save();
             return res.json({ msg: 'Sent registration request successfully!' });
-            User_1.default.findOne({ $or: [{ username: username }, { email: email }] }).then((user => {
-                return res.json({ msg: 'User already exists!' });
-            })).catch(err => {
-                // user does not exist, send register request
-                const newUser = new User_1.default({
-                    username,
-                    password,
-                    forename,
-                    surname,
-                    sex,
-                    type,
-                    address,
-                    email,
-                    contactPhone,
-                    securityQuestion,
-                    securityAnswer,
-                    creditCardNumber,
-                    verified,
-                });
-                newUser.save();
-                return res.json({ msg: 'Sent registration request successfully!' });
-            });
+        });
+        this.updateInfo = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { username, forename, surname, address, email, contactPhone, creditCardNumber } = req.body;
+                const user = yield User_1.default.findOne({ username });
+                if (!user) {
+                    return res.json({ msg: 'User not found' });
+                }
+                // check if new email is already used by another user
+                const user2 = yield User_1.default.findOne({ email });
+                if (user2) {
+                    if (user2.email != user.email) {
+                        return res.json({ msg: 'New email is already taken!' });
+                    }
+                }
+                // Update user information
+                user.forename = forename;
+                user.surname = surname;
+                user.address = address;
+                user.email = email;
+                user.contactPhone = contactPhone;
+                user.creditCardNumber = creditCardNumber;
+                // Save the updated user information
+                yield user.save();
+                res.json({ msg: 'User information updated successfully!' });
+            }
+            catch (error) {
+                res.json({ msg: 'An error occurred while updating user information!' });
+            }
         });
     }
 }

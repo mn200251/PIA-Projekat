@@ -12,4 +12,7 @@ userRouter
 userRouter
     .route("/register")
     .post((req, res) => new UserController_1.UserController().register(req, res));
+userRouter
+    .route("/updateInfo")
+    .post((req, res) => new UserController_1.UserController().updateInfo(req, res));
 exports.default = userRouter;

@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { CommonModule } from '@angular/common';
+import { GuestComponent } from './guest/guest.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PocetnaComponent,
+    GuestComponent,
   ],
   imports: [
     BrowserModule,
