@@ -15,4 +15,7 @@ userRouter
 userRouter
     .route("/updateInfo")
     .post((req, res) => new UserController_1.UserController().updateInfo(req, res));
+userRouter
+    .route("/getUsers")
+    .get((req, res) => new UserController_1.UserController().getUsers(req, res));
 exports.default = userRouter;

@@ -9,6 +9,8 @@ import { PocetnaComponent } from './pocetna/pocetna.component';
 import { CommonModule } from '@angular/common';
 import { GuestComponent } from './guest/guest.component';
 import { WaiterComponent } from './waiter/waiter.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { WaiterComponent } from './waiter/waiter.component';
     PocetnaComponent,
     GuestComponent,
     WaiterComponent,
+    AdminComponent,
+    AdminLoginComponent,
   ],
   imports: [
     BrowserModule,

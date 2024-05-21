@@ -30,6 +30,7 @@ export class UserController {
       let creditCardNumber = req.body.creditCardNumber
 
       let verified = false
+      let banned = false
 
       const existingUser = await User.findOne({ $or: [{ username:username }, { email:email }] })
 
@@ -50,6 +51,7 @@ export class UserController {
         securityAnswer,
         creditCardNumber,
         verified,
+        banned
       });
 
       await newUser.save();
@@ -93,5 +95,11 @@ export class UserController {
     
     }
 
+    getUsers = async (req: express.Request, res: express.Response) => {
+        
+        const users = await User.find({banned:false})
+
+        return res.json(users);
+    }
 
 }

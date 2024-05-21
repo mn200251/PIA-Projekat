@@ -76,4 +76,9 @@ export class UserService {
 
     return this.http.post<string>('http://localhost:4000/users/updateInfo', data);
   }
+
+  getUsers()
+  {
+    return this.http.get<User[]>('http://localhost:4000/users/getUsers');
+  }
 }

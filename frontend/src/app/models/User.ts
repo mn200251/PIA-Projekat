@@ -14,4 +14,5 @@ export class User{
     creditCardNumber: number = 0
 
     verified: boolean = false
+    banned: boolean = false
 }

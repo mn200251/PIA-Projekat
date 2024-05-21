@@ -1,0 +1,85 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(1)">User List</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(2)">Restaurant List</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(3)">User Requests</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(4)">Add Restaurant</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(5)">Add Waiter</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<div class="container">
+  
+    <div *ngIf="page == 1">
+        <h3>User List</h3><br>
+
+        <table>
+            <tr>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact Phone</th>
+                <th>Credit Card Number</th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let user of users">
+                <td>
+                    <input type="text" name="forename" placeholder="Forename" [(ngModel)]="user.forename">
+                </td>
+                <td>
+                    <input type="text" name="surname" placeholder="Surname" [(ngModel)]="user.surname">
+                </td>
+                <td>
+                    <input type="text" name="address" placeholder="Address" [(ngModel)]="user.address">
+                </td>
+                <td>
+                    <input type="email" name="email" placeholder="Email" [(ngModel)]="user.email">
+                </td>
+                <td>
+                    <input type="tel" name="contactPhone" placeholder="Phone" [(ngModel)]="user.contactPhone">
+                </td>
+                <td>
+                    <input type="number" name="creditCardNumber" placeholder="Credit Card Number" [(ngModel)]="user.creditCardNumber">
+                </td>
+                <td>
+                    <button (click)="updateInfo(user)" class="btn btn-success">Save</button>
+                    <button (click)="banUser(user)" class="btn btn-danger">Ban</button>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+    </div>
+
+</div>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

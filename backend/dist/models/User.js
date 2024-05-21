@@ -48,5 +48,8 @@ let User = new Schema({
     verified: {
         type: Boolean,
     },
+    banned: {
+        type: Boolean
+    }
 });
 exports.default = mongoose_1.default.model("User", User, "Users");

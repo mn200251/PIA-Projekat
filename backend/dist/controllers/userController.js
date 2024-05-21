@@ -40,6 +40,7 @@ class UserController {
             // let profilePicure = req.body.profilePicure
             let creditCardNumber = req.body.creditCardNumber;
             let verified = false;
+            let banned = false;
             const existingUser = yield User_1.default.findOne({ $or: [{ username: username }, { email: email }] });
             if (existingUser)
                 return res.json({ msg: 'User already exists!' });
@@ -57,6 +58,7 @@ class UserController {
                 securityAnswer,
                 creditCardNumber,
                 verified,
+                banned
             });
             yield newUser.save();
             return res.json({ msg: 'Sent registration request successfully!' });
@@ -89,6 +91,10 @@ class UserController {
             catch (error) {
                 res.json({ msg: 'An error occurred while updating user information!' });
             }
+        });
+        this.getUsers = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const users = yield User_1.default.find({ banned: false });
+            return res.json(users);
         });
     }
 }

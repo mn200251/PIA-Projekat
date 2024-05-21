@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        
+      </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h3>Admin Login</h3><br>
+
+    <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
+    <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
+  
+    <p class="error">{{error}}</p>
+
+    <button (click)="adminLogin()">Login</button>
+
+
+</div>

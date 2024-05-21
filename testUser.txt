@@ -1,15 +1,16 @@
 {
-  "username": "nik",
+  "username": "admin",
   "password": "123",
-  "forename": "Nikola",
-  "surname": "Mirkovic",
+  "forename": "Admin",
+  "surname": "Adminovic",
   "sex": "M",
-  "type": "customer",
-  "address": "123 Test St, Test City, TX",
+  "type": "admin",
+  "address": "123 Playground Stret",
   "email": "nikola.mirkovic.bg@gmail.com",
   "contactPhone": 1234567890,
-  "securityQuestion": "What is your favorite color?",
-  "securityAnswer": "Blue",
-  "creditCardNumber": 1234567812345678,
-  "verified": false
+  "securityQuestion": "What color is your bugatti?",
+  "securityAnswer": "Black",
+  "creditCardNumber": 132367812345678,
+  "verified": true
+  "banned": false
 }
