@@ -20,13 +20,17 @@ export class GuestComponent implements OnInit {
     if(temp)
     {
       this.user = JSON.parse(temp);
+
+      if (this.user.type != "guest")
+      {
+        localStorage.removeItem("user")
+        this.router.navigate([""]);
+      }
     }
     else
     {
       this.router.navigate([""]);
     }
-
-
   }
 
   page: number = 1
@@ -56,5 +60,11 @@ export class GuestComponent implements OnInit {
         alert(data.msg)
         window.location.reload();
     })
+  }
+
+  logout()
+  {
+    localStorage.removeItem("user")
+    this.router.navigate([""])
   }
 }

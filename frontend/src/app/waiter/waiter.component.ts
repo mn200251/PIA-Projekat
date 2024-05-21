@@ -19,13 +19,17 @@ export class WaiterComponent {
     if(temp)
     {
       this.user = JSON.parse(temp);
+
+      if (this.user.type != "waiter")
+      {
+        localStorage.removeItem("user")
+        this.router.navigate([""]);
+      }
     }
     else
     {
       this.router.navigate([""]);
     }
-
-
   }
 
   page: number = 1
@@ -56,5 +60,10 @@ export class WaiterComponent {
         window.location.reload();
     })
   }
-  
+
+  logout()
+  {
+    localStorage.removeItem("user")
+    this.router.navigate([""])
+  }
 }
