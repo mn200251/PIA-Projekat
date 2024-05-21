@@ -42,12 +42,8 @@ let User = new Schema({
   creditCardNumber: {
     type: Number,
   },
-
-  verified: {
-    type: Boolean,
-  },
-  banned: {
-    type: Boolean
+  accountStatus: {
+    type: Number,
   }
 });
 

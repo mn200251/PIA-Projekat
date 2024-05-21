@@ -72,12 +72,12 @@
                 </td>
                 <td>
                     <button (click)="updateInfo(user)" class="btn btn-success">Save</button>
-                    <button (click)="setBan(user)" class="btn btn-danger">
-                        <div *ngIf="user.banned == true">
+                    <button (click)="setStatus(user)" class="btn btn-danger">
+                        <div *ngIf="user.accountStatus == -2">
                             Unban
                         </div>
 
-                        <div *ngIf="user.banned == false">
+                        <div *ngIf="user.accountStatus == 1">
                             Ban
                         </div>
                     </button>
@@ -88,6 +88,41 @@
         <br>
     </div>
 
+    <div *ngIf="page == 3">
+        <h3>Request List</h3><br>
+
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Forename</th>
+                <th>Email</th>
+                <th>Contact Phone</th>
+                <th>Credit Card Number</th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let user of requestedUsers">
+                <td>
+                    <p>{{user.username}}</p>
+                </td>
+                <td>
+                    <p>{{user.forename}}</p>
+                </td>
+                <td>
+                    <p>{{user.email}}</p>
+                </td>
+                <td>
+                    <p>{{user.contactPhone}}</p>
+                </td>
+                <td>
+                    <p>{{user.creditCardNumber}}</p>
+                </td>
+                <td>
+                    <button (click)="acceptUser(user)" class="btn btn-success">Accept</button>
+                    <button (click)="rejectUser(user)" class="btn btn-danger">Reject</button>
+                </td>
+        </table>
+
+        <br>
 </div>
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

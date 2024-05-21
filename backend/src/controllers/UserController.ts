@@ -29,8 +29,7 @@ export class UserController {
       // let profilePicure = req.body.profilePicure
       let creditCardNumber = req.body.creditCardNumber
 
-      let verified = false
-      let banned = false
+      let accountStatus = 0
 
       const existingUser = await User.findOne({ $or: [{ username:username }, { email:email }] })
 
@@ -50,8 +49,7 @@ export class UserController {
         securityQuestion,
         securityAnswer,
         creditCardNumber,
-        verified,
-        banned
+        accountStatus
       });
 
       await newUser.save();
@@ -102,23 +100,25 @@ export class UserController {
         return res.json(users);
     }
 
-    setBan = async (req: express.Request, res: express.Response) => {
+    setStatus = async (req: express.Request, res: express.Response) => {
         let username = req.body.username
-        let newBanValue = req.body.banned
+        let newStatusValue = req.body.accountStatus
 
         const user = await User.findOne({ username });
         if (!user) {
             return res.json({ msg: 'User not found' });
         }
 
-        user.banned = newBanValue
+        user.accountStatus = newStatusValue
 
         await user.save();
 
-        if (newBanValue == true)
+        if (newStatusValue == -2)
             return res.json({ msg: 'User banned successfully!' });
-        else
+        else if (newStatusValue == 1)
             return res.json({ msg: 'User unbanned successfully!' });
+        else if (newStatusValue == -1)
+            return res.json({ msg: 'User rejected successfully!' });
     }
 
 }

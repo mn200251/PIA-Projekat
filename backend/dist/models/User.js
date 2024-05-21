@@ -45,11 +45,8 @@ let User = new Schema({
     creditCardNumber: {
         type: Number,
     },
-    verified: {
-        type: Boolean,
-    },
-    banned: {
-        type: Boolean
+    accountStatus: {
+        type: Number,
     }
 });
 exports.default = mongoose_1.default.model("User", User, "Users");

@@ -15,6 +15,10 @@ export class WaiterComponent {
   }
 
   ngOnInit(): void {
+    let p = localStorage.getItem("page")
+    if (p)
+      this.page = parseInt(p)
+
     let temp = localStorage.getItem("user")
     if(temp)
     {
@@ -25,13 +29,14 @@ export class WaiterComponent {
         localStorage.removeItem("user")
         this.router.navigate([""]);
       }
-      
-      if (this.user.banned == true)
-        {
-          alert("You are banned!")
-          localStorage.removeItem("user")
-          this.router.navigate([""]);
-        }
+
+      if (this.user.accountStatus != 1)
+      {
+        this.error = "This account is not active!"
+        localStorage.removeItem("user")
+        this.router.navigate([""]);
+      }
+
     }
     else
     {
@@ -70,6 +75,7 @@ export class WaiterComponent {
 
   logout()
   {
+    localStorage.removeItem("page")
     localStorage.removeItem("user")
     this.router.navigate([""])
   }

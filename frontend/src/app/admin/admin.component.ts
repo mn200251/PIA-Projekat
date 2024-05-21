@@ -16,6 +16,10 @@ export class AdminComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    let p = localStorage.getItem("page")
+    if (p)
+      this.page = parseInt(p)
+
     let temp = localStorage.getItem("user")
     if(temp)
     {
@@ -36,7 +40,11 @@ export class AdminComponent implements OnInit{
     this.userService.getUsers().subscribe(data => {
       if (data)
       {
-        this.users = data
+        // filter out deactivated or requested accounts
+        this.users = data.filter(user => {
+          return user.accountStatus !== -1 && user.accountStatus !== 0
+        });
+        this.requestedUsers = data.filter(user => user.accountStatus == 0)
       }
 
     })
@@ -44,11 +52,13 @@ export class AdminComponent implements OnInit{
 
   page: number = 1
   users: User[] = []
+  requestedUsers: User[] = []
   admin: User = new User()
 
   navigateTo(newPage: number)
   {
     this.page = newPage
+    localStorage.setItem("page", newPage.toString())
   }
 
   updateInfo(user:User)
@@ -66,9 +76,33 @@ export class AdminComponent implements OnInit{
     })
   }
 
-  setBan(user: User)
+  setStatus(user: User)
   {
-    this.userService.setBan(user.username, !user.banned).subscribe((data:any) => {
+    
+    let newStatus = 0
+
+    if (user.accountStatus == -2)
+      newStatus = 1
+    else if (user.accountStatus == 1)
+      newStatus = -2
+
+    this.userService.setStatus(user.username, newStatus).subscribe((data:any) => {
+      alert(data.msg)
+      window.location.reload();
+    })
+  }
+
+  acceptUser(user: User)
+  {
+    this.userService.setStatus(user.username, 1).subscribe((data:any) => {
+      alert(data.msg)
+      window.location.reload();
+    })
+  }
+
+  rejectUser(user:User)
+  {
+    this.userService.setStatus(user.username, -1).subscribe((data:any) => {
       alert(data.msg)
       window.location.reload();
     })
@@ -76,6 +110,7 @@ export class AdminComponent implements OnInit{
 
   logout()
   {
+    localStorage.removeItem("page")
     localStorage.removeItem("user")
     this.router.navigate([""])
   }

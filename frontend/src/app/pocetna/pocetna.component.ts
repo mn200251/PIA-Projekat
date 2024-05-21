@@ -67,10 +67,11 @@ export class PocetnaComponent {
     this.userService.login(this.username, this.password).subscribe(data =>{
       if (data)
       {
-        if (data.banned)
+        if (data.accountStatus != 1)
         {
-          this.error = "You are banned!"
-          return
+          this.error = "This account is not active!"
+          localStorage.removeItem("user")
+          this.router.navigate([""]);
         }
 
         this.error = ""

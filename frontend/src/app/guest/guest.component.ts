@@ -16,6 +16,10 @@ export class GuestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let p = localStorage.getItem("page")
+    if (p)
+      this.page = parseInt(p)
+
     let temp = localStorage.getItem("user")
     if(temp)
     {
@@ -26,12 +30,14 @@ export class GuestComponent implements OnInit {
         localStorage.removeItem("user")
         this.router.navigate([""]);
       }
-      if (this.user.banned == true)
+      if (this.user.accountStatus != 1)
       {
-        alert("You are banned!")
+        alert("This account is not active!")
         localStorage.removeItem("user")
         this.router.navigate([""]);
       }
+      
+
     }
     else
     {
@@ -46,6 +52,7 @@ export class GuestComponent implements OnInit {
   navigateTo(newPage: number)
   {
     this.page = newPage
+    localStorage.setItem("page", newPage.toString())
   }
 
   updateInfo()
@@ -70,6 +77,7 @@ export class GuestComponent implements OnInit {
 
   logout()
   {
+    localStorage.removeItem("page")
     localStorage.removeItem("user")
     this.router.navigate([""])
   }

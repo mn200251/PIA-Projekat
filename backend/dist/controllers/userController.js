@@ -39,8 +39,7 @@ class UserController {
             let securityAnswer = req.body.securityAnswer;
             // let profilePicure = req.body.profilePicure
             let creditCardNumber = req.body.creditCardNumber;
-            let verified = false;
-            let banned = false;
+            let accountStatus = 0;
             const existingUser = yield User_1.default.findOne({ $or: [{ username: username }, { email: email }] });
             if (existingUser)
                 return res.json({ msg: 'User already exists!' });
@@ -57,8 +56,7 @@ class UserController {
                 securityQuestion,
                 securityAnswer,
                 creditCardNumber,
-                verified,
-                banned
+                accountStatus
             });
             yield newUser.save();
             return res.json({ msg: 'Sent registration request successfully!' });
@@ -96,19 +94,21 @@ class UserController {
             const users = yield User_1.default.find({ type: { $ne: "admin" } });
             return res.json(users);
         });
-        this.setBan = (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.setStatus = (req, res) => __awaiter(this, void 0, void 0, function* () {
             let username = req.body.username;
-            let newBanValue = req.body.banned;
+            let newStatusValue = req.body.accountStatus;
             const user = yield User_1.default.findOne({ username });
             if (!user) {
                 return res.json({ msg: 'User not found' });
             }
-            user.banned = newBanValue;
+            user.accountStatus = newStatusValue;
             yield user.save();
-            if (newBanValue == true)
+            if (newStatusValue == -2)
                 return res.json({ msg: 'User banned successfully!' });
-            else
+            else if (newStatusValue == 1)
                 return res.json({ msg: 'User unbanned successfully!' });
+            else if (newStatusValue == -1)
+                return res.json({ msg: 'User rejected successfully!' });
         });
     }
 }
