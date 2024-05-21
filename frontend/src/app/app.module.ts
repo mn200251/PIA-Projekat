@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { CommonModule } from '@angular/common';
 import { GuestComponent } from './guest/guest.component';
+import { WaiterComponent } from './waiter/waiter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PocetnaComponent,
     GuestComponent,
+    WaiterComponent,
   ],
   imports: [
     BrowserModule,
