@@ -72,7 +72,15 @@
                 </td>
                 <td>
                     <button (click)="updateInfo(user)" class="btn btn-success">Save</button>
-                    <button (click)="banUser(user)" class="btn btn-danger">Ban</button>
+                    <button (click)="setBan(user)" class="btn btn-danger">
+                        <div *ngIf="user.banned == true">
+                            Unban
+                        </div>
+
+                        <div *ngIf="user.banned == false">
+                            Ban
+                        </div>
+                    </button>
                 </td>
             </tr>
         </table>

@@ -18,4 +18,7 @@ userRouter
 userRouter
     .route("/getUsers")
     .get((req, res) => new UserController_1.UserController().getUsers(req, res));
+userRouter
+    .route("/setBan")
+    .post((req, res) => new UserController_1.UserController().setBan(req, res));
 exports.default = userRouter;

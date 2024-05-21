@@ -67,6 +67,12 @@ export class PocetnaComponent {
     this.userService.login(this.username, this.password).subscribe(data =>{
       if (data)
       {
+        if (data.banned)
+        {
+          this.error = "You are banned!"
+          return
+        }
+
         this.error = ""
         localStorage.setItem("user", JSON.stringify(data))
         this.router.navigate([data.type]);

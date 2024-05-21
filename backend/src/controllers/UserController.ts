@@ -97,9 +97,28 @@ export class UserController {
 
     getUsers = async (req: express.Request, res: express.Response) => {
         
-        const users = await User.find({banned:false})
+        const users = await User.find({ type: { $ne: "admin" } });
 
         return res.json(users);
+    }
+
+    setBan = async (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+        let newBanValue = req.body.banned
+
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.json({ msg: 'User not found' });
+        }
+
+        user.banned = newBanValue
+
+        await user.save();
+
+        if (newBanValue == true)
+            return res.json({ msg: 'User banned successfully!' });
+        else
+            return res.json({ msg: 'User unbanned successfully!' });
     }
 
 }

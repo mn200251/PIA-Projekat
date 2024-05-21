@@ -93,8 +93,22 @@ class UserController {
             }
         });
         this.getUsers = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const users = yield User_1.default.find({ banned: false });
+            const users = yield User_1.default.find({ type: { $ne: "admin" } });
             return res.json(users);
+        });
+        this.setBan = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.body.username;
+            let newBanValue = req.body.banned;
+            const user = yield User_1.default.findOne({ username });
+            if (!user) {
+                return res.json({ msg: 'User not found' });
+            }
+            user.banned = newBanValue;
+            yield user.save();
+            if (newBanValue == true)
+                return res.json({ msg: 'User banned successfully!' });
+            else
+                return res.json({ msg: 'User unbanned successfully!' });
         });
     }
 }

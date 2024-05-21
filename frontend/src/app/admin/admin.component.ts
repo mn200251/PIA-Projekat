@@ -66,9 +66,12 @@ export class AdminComponent implements OnInit{
     })
   }
 
-  banUser(user: User)
+  setBan(user: User)
   {
-
+    this.userService.setBan(user.username, !user.banned).subscribe((data:any) => {
+      alert(data.msg)
+      window.location.reload();
+    })
   }
 
   logout()

@@ -25,6 +25,13 @@ export class WaiterComponent {
         localStorage.removeItem("user")
         this.router.navigate([""]);
       }
+      
+      if (this.user.banned == true)
+        {
+          alert("You are banned!")
+          localStorage.removeItem("user")
+          this.router.navigate([""]);
+        }
     }
     else
     {

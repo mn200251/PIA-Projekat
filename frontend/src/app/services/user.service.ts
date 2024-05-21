@@ -81,4 +81,14 @@ export class UserService {
   {
     return this.http.get<User[]>('http://localhost:4000/users/getUsers');
   }
+
+  setBan(username: string, banned: boolean)
+  {
+    const data= {
+      username: username,
+      banned: banned
+    }
+
+    return this.http.post<string>('http://localhost:4000/users/setBan', data);
+  }
 }

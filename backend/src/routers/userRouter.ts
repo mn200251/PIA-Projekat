@@ -20,4 +20,8 @@ userRouter
     .route("/getUsers")
     .get((req, res) => new UserController().getUsers(req, res));
 
+userRouter
+    .route("/setBan")
+    .post((req, res) => new UserController().setBan(req, res));
+
 export default userRouter;
