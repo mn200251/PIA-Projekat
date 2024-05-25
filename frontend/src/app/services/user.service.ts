@@ -102,4 +102,23 @@ export class UserService {
 
     return this.http.post<string>('http://localhost:4000/users/resetPasswordKnow', data);
   }
+
+  getSecurityDetails(username: string)
+  {
+    const data= {
+      username: username,
+    }
+
+    return this.http.post<User>('http://localhost:4000/users/getSecurityDetails', data);
+  }
+
+  resetPasswordDontKnow(username: string, newPassword: string)
+  {
+    const data= {
+      username: username,
+      newPassword: newPassword
+    }
+
+    return this.http.post<string>('http://localhost:4000/users/resetPasswordDontKnow', data);
+  }
 }

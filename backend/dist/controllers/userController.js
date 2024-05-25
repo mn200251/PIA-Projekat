@@ -125,6 +125,26 @@ class UserController {
             yield user.save();
             return res.json({ msg: 'Success!' });
         });
+        this.getSecurityDetails = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.body.username;
+            const user = yield User_1.default.findOne({ username });
+            if (!user) {
+                return res.json({ msg: 'User not found!' });
+            }
+            return res.json(user);
+        });
+        this.resetPasswordDontKnow = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.body.username;
+            let newPassword = req.body.newPassword;
+            const user = yield User_1.default.findOne({ username });
+            if (!user) // should never happen!
+             {
+                return res.json({ msg: 'User not found!' });
+            }
+            user.password = newPassword;
+            yield user.save();
+            return res.json({ msg: 'Success!' });
+        });
     }
 }
 exports.UserController = UserController;

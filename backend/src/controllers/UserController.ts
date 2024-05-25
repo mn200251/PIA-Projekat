@@ -144,4 +144,36 @@ export class UserController {
         return res.json({ msg: 'Success!' });
 
     }
+
+    getSecurityDetails = async (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+
+        const user = await User.findOne({ username });
+
+        if (!user)
+        {
+            return res.json({ msg: 'User not found!' });
+        }
+
+        return res.json(user);
+    }
+
+    resetPasswordDontKnow = async (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+
+        let newPassword = req.body.newPassword
+
+        const user = await User.findOne({ username });
+
+        if (!user) // should never happen!
+        {
+            return res.json({ msg: 'User not found!' });
+        }
+
+        user.password = newPassword
+
+        await user.save();
+
+        return res.json({ msg: 'Success!' });
+    }
 }

@@ -24,6 +24,8 @@ export class PocetnaComponent {
   newPassword: string = ""
   confirmNewPassword: string = ""
 
+  userSecurityAnswer: string = ""
+
   navigateTo(newPage: number)
   {
     this.clear()
@@ -53,6 +55,8 @@ export class PocetnaComponent {
     this.oldPassword = ""
     this.newPassword = ""
     this.confirmNewPassword = ""
+
+    this.userSecurityAnswer = ""
   }
 
 
@@ -192,10 +196,10 @@ export class PocetnaComponent {
 
     this.userService.resetPasswordKnow(this.username, this.oldPassword, this.newPassword).subscribe((data:any) => {
       alert(data.msg)
-      if (data.msg == 'Success')
+      if (data.msg == 'Success!')
       {
         this.clear()
-        window.location.reload()
+        this.navigateTo(1)
       }
 
     })
@@ -203,7 +207,70 @@ export class PocetnaComponent {
 
   resetPasswordDontKnow(step: number)
   {
+    this.error = ""
 
+    if (step == 1)
+    {
+      if (!this.username)
+      {
+        this.error = "Please enter your username!"
+        return
+      }
+
+      this.userService.getSecurityDetails(this.username).subscribe((data:any) => {
+
+        if (data.msg == "User not found!")
+        {
+            this.error = "Username not found!"
+            return
+        }
+
+        this.securityQuestion = data.securityQuestion
+        this.securityAnswer = data.securityAnswer
+
+
+        this.error = ""
+        this.page = 322
+      })
+    }
+    else if(step == 2)
+    {
+      if (this.userSecurityAnswer != this.securityAnswer)
+      {
+        this.error = "The answer is not correct!"
+        return
+      }
+
+      this.error = ""
+      this.page = 323
+    }
+    else // step == 3
+    {
+      ////////////////////////////// check new password valid
+
+      if (!this.newPassword || !this.confirmNewPassword)
+      {
+        this.error = "Please enter both fields!";
+        return;
+      }
+
+      if (this.newPassword != this.confirmNewPassword)
+      {
+        this.error = "New password must be the same in both fields!";
+        return;
+      }
+
+      this.userService.resetPasswordDontKnow(this.username, this.newPassword).subscribe((data:any) => {
+        alert(data.msg)
+        if (data.msg == 'Success!')
+        {
+          this.clear()
+          this.navigateTo(1)
+        }
+      })
+    
+
+    }
   }
 
 }

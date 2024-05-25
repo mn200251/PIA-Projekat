@@ -28,4 +28,12 @@ userRouter
     .route("/resetPasswordKnow")
     .post((req, res) => new UserController().resetPasswordKnow(req, res));
 
+userRouter
+    .route("/getSecurityDetails")
+    .post((req, res) => new UserController().getSecurityDetails(req, res));
+
+userRouter
+    .route("/resetPasswordDontKnow")
+    .post((req, res) => new UserController().resetPasswordDontKnow(req, res));
+
 export default userRouter;
