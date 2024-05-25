@@ -1,0 +1,59 @@
+{
+  "name": "The Gourmet Kitchen",
+  "type": "Fine Dining",
+  "address": "123 Culinary Street, Food City",
+  "description": "A luxurious dining experience with exquisite gourmet dishes.",
+  "contactPerson": "John Doe",
+  "layout": {
+    "tables": [
+      { "id": 1, "x": 50, "y": 50, "radius": 20, "maxPeople": 4 },
+      { "id": 2, "x": 150, "y": 50, "radius": 20, "maxPeople": 4 },
+      { "id": 3, "x": 250, "y": 50, "radius": 20, "maxPeople": 4 }
+    ],
+    "kitchens": [
+      { "id": 1, "x": 0, "y": 150, "width": 100, "height": 100 }
+    ],
+    "toilets": [
+      { "id": 1, "x": 200, "y": 150, "width": 100, "height": 100 }
+    ]
+  },
+  "workingHours": [
+    { "day": "Monday", "open": "08:00", "close": "22:00" },
+    { "day": "Tuesday", "open": "08:00", "close": "22:00" },
+    { "day": "Wednesday", "open": "08:00", "close": "22:00" },
+    { "day": "Thursday", "open": "08:00", "close": "22:00" },
+    { "day": "Friday", "open": "08:00", "close": "23:00" },
+    { "day": "Saturday", "open": "09:00", "close": "23:00" },
+    { "day": "Sunday", "open": "09:00", "close": "21:00" }
+  ]
+}
+{
+  "name": "Family Feast",
+  "type": "Casual Dining",
+  "address": "456 Tasty Avenue, Flavor Town",
+  "description": "A cozy place for families to enjoy hearty meals together.",
+  "contactPerson": "Jane Smith",
+  "layout": {
+    "tables": [
+      { "id": 1, "x": 60, "y": 60, "radius": 25, "maxPeople": 6 },
+      { "id": 2, "x": 160, "y": 60, "radius": 25, "maxPeople": 6 },
+      { "id": 3, "x": 260, "y": 60, "radius": 25, "maxPeople": 6 },
+      { "id": 4, "x": 360, "y": 60, "radius": 25, "maxPeople": 6 }
+    ],
+    "kitchens": [
+      { "id": 1, "x": 0, "y": 200, "width": 150, "height": 150 }
+    ],
+    "toilets": [
+      { "id": 1, "x": 250, "y": 200, "width": 100, "height": 150 }
+    ]
+  },
+  "workingHours": [
+    { "day": "Monday", "open": "07:00", "close": "21:00" },
+    { "day": "Tuesday", "open": "07:00", "close": "21:00" },
+    { "day": "Wednesday", "open": "07:00", "close": "21:00" },
+    { "day": "Thursday", "open": "07:00", "close": "21:00" },
+    { "day": "Friday", "open": "07:00", "close": "22:00" },
+    { "day": "Saturday", "open": "08:00", "close": "22:00" },
+    { "day": "Sunday", "open": "08:00", "close": "20:00" }
+  ]
+}

@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const userRouter_1 = __importDefault(require("./routers/userRouter"));
+const restaurantRouter_1 = __importDefault(require("./routers/restaurantRouter"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -17,6 +18,7 @@ connection.once("open", () => {
 });
 const router = express_1.default.Router();
 router.use("/users", userRouter_1.default);
+router.use("/restaurants", restaurantRouter_1.default);
 app.use("/", router);
 app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(4000, () => console.log(`Express server running on port 4000`));

@@ -121,8 +121,44 @@
                     <button (click)="rejectUser(user)" class="btn btn-danger">Reject</button>
                 </td>
         </table>
+    </div>
 
-        <br>
+    <div class="container">
+        <div *ngIf="page == 4">
+            <h3>Add Restaurant</h3><br>
+
+            <form (submit)="saveRestaurant()">
+                Name:
+                <input type="text" [(ngModel)]="name" name="name" required />
+
+                <label>Type:</label>
+                <input type="text" [(ngModel)]="type" name="type" required />
+
+                <label>Address:</label>
+                <input type="text" [(ngModel)]="address" name="address" required />
+
+                <label>Description:</label>
+                <textarea [(ngModel)]="description" name="description" required></textarea>
+
+                <label>Contact Person:</label>
+                <input type="text" [(ngModel)]="contactPerson" name="contactPerson" required />
+
+                Layout: <input type="file" (change)="onFileSelected($event)">
+
+                <div>
+                Working Hours: 
+                <button type="button" (click)="addWorkingHours('Monday', '08:00', '18:00')">Add Working Hours</button>
+                </div>
+
+                <br>
+
+                <p class="error">{{error}}</p>
+
+                <button type="submit">Save Restaurant</button>
+            </form>
+        </div>
+    </div>
+
 </div>
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
