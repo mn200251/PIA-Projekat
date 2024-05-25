@@ -169,12 +169,39 @@ export class PocetnaComponent {
 
   }
 
-  resetKnow()
+  resetPasswordKnow()
   {
+    ////////////////////////////////////// add password check
 
+    if (!this.username || !this.oldPassword || !this.newPassword || !this.confirmNewPassword) {
+      this.error = "Please fill in all the required fields.";
+      return;
+    }
+
+    if (this.newPassword != this.confirmNewPassword)
+    {
+      this.error = "New password must be the same in both fields!";
+      return;
+    }
+
+    if (this.oldPassword == this.newPassword)
+    {
+      this.error = "New password can not be same as old password!";
+      return;
+    }
+
+    this.userService.resetPasswordKnow(this.username, this.oldPassword, this.newPassword).subscribe((data:any) => {
+      alert(data.msg)
+      if (data.msg == 'Success')
+      {
+        this.clear()
+        window.location.reload()
+      }
+
+    })
   }
 
-  resetDontKnow(step: number)
+  resetPasswordDontKnow(step: number)
   {
 
   }

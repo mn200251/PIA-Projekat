@@ -91,4 +91,15 @@ export class UserService {
 
     return this.http.post<string>('http://localhost:4000/users/setStatus', data);
   }
+
+  resetPasswordKnow(username: string, oldPassword: string, newPassword: string)
+  {
+    const data= {
+      username: username,
+      oldPassword: oldPassword,
+      newPassword: newPassword
+    }
+
+    return this.http.post<string>('http://localhost:4000/users/resetPasswordKnow', data);
+  }
 }

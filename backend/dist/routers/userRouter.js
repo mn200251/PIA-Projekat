@@ -21,4 +21,7 @@ userRouter
 userRouter
     .route("/setStatus")
     .post((req, res) => new UserController_1.UserController().setStatus(req, res));
+userRouter
+    .route("/resetPasswordKnow")
+    .post((req, res) => new UserController_1.UserController().resetPasswordKnow(req, res));
 exports.default = userRouter;

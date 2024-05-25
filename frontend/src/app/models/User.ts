@@ -13,7 +13,6 @@ export class User{
     profilePicure: any | null = null
     creditCardNumber: number = 0
 
-
     accountStatus: number = 0
     // 0  - requested
     // 1  - accepted

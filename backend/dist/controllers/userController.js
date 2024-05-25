@@ -110,6 +110,21 @@ class UserController {
             else if (newStatusValue == -1)
                 return res.json({ msg: 'User rejected successfully!' });
         });
+        this.resetPasswordKnow = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.body.username;
+            let oldPassword = req.body.oldPassword;
+            let newPassword = req.body.newPassword;
+            const user = yield User_1.default.findOne({ username });
+            if (!user) {
+                return res.json({ msg: 'User not found!' });
+            }
+            if (user.password != oldPassword) {
+                return res.json({ msg: 'Incorrect password for user!' });
+            }
+            user.password = newPassword;
+            yield user.save();
+            return res.json({ msg: 'Success!' });
+        });
     }
 }
 exports.UserController = UserController;

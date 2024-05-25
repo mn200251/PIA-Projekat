@@ -121,4 +121,27 @@ export class UserController {
             return res.json({ msg: 'User rejected successfully!' });
     }
 
+    resetPasswordKnow = async (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+        let oldPassword = req.body.oldPassword
+        let newPassword = req.body.newPassword
+
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.json({ msg: 'User not found!' });
+        }
+
+        if (user.password != oldPassword)
+        {
+            return res.json({ msg: 'Incorrect password for user!' });
+        }
+
+        user.password = newPassword
+
+        await user.save();
+
+        return res.json({ msg: 'Success!' });
+
+    }
 }

@@ -73,6 +73,9 @@
     <div id="resetForm" *ngIf="page == 31">
         <h4>Reset password</h4><br>
     
+        Username:
+        <input type="text" name="username" [(ngModel)]="username">
+
         Old password:
         <input type="password" name="oldPassword" [(ngModel)]="oldPassword">
 
@@ -84,7 +87,7 @@
 
         <p class="error">{{error}}</p>
 
-        <button (click)="resetKnow()">Submit</button>
+        <button (click)="resetPasswordKnow()">Submit</button>
     
     </div>
 
@@ -94,7 +97,7 @@
         Enter your username:
         <input type="password" name="oldPassword" [(ngModel)]="oldPassword">
 
-        <button (click)="resetDontKnow(1)">Get security question</button>
+        <button (click)="resetPasswordDontKnow(1)">Get security question</button>
     
     </div>
 
@@ -104,7 +107,7 @@
         "{{securityQuestion}}"
         <input type="text" name="securityAnswer" [(ngModel)]="securityAnswer">
 
-        <button (click)="resetDontKnow(2)">Submit</button>
+        <button (click)="resetPasswordDontKnow(2)">Submit</button>
     
     </div>
 
@@ -117,7 +120,7 @@
         Confirm new password:
         <input type="password" name="confirmNewPassword" [(ngModel)]="confirmNewPassword">
 
-        <button (click)="resetDontKnow(3)">Submit</button>
+        <button (click)="resetPasswordDontKnow(3)">Submit</button>
     
     </div>
 
