@@ -12,7 +12,7 @@ export class RestaurantController {
             await newRestaurant.save();
             res.json({msg: 'Success!'});
         } catch (error) {
-            res.send(error);
+            res.json({msg: error});
         }
     };
     

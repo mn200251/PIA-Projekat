@@ -125,6 +125,17 @@ export class AdminComponent implements OnInit{
   layoutFile: File | null = null
   error: string = ""
 
+  DaysOfWeek: string[] = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+]
+
+  workingHoursText: string = ""
 
   addTable(x: number, y: number, radius: number, maxPeople: number): void {
     const id = this.tables.length + 1;
@@ -141,11 +152,60 @@ export class AdminComponent implements OnInit{
     this.toilets.push({ id, x, y, width, height});
   }
 
-  addWorkingHours(day: string, open: string, close: string): void {
+
+
+  addWorkingHours() : boolean
+  {
+    this.error = ""
+
+    const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+    let status = true
+    try
+    {
+      let trimmedWorkingHoursText = this.workingHoursText.trim().slice(0, -1) // remove last ;
+      let workingHourLines = trimmedWorkingHoursText.split(";")
+
+      workingHourLines.forEach(workingHour => {
+        let line = workingHour.trim().split(",")
+        let day = line[0].trim()
+        let open = line[1].trim()
+        let close = line[2].trim()
+
+        if (!this.DaysOfWeek.includes(day))
+        {
+          this.error = "Incorrect format for day!"
+          this.resetLayout()
+          status = false
+          return
+        }
+
+        // Test the time string against the regex
+        if (!timeRegex.test(open) || !timeRegex.test(close)) {
+          this.error = "Incorrect format for working hours!"
+          this.resetLayout()
+          status = false
+          return
+        }
+
+        this.addWorkingHour(day, open, close)
+      });
+    }
+    catch(e)
+    {
+      this.error = "Incorrect format for working hours!"
+      this.resetLayout()
+      return false
+    }
+    
+    return status
+  }
+
+  addWorkingHour(day: string, open: string, close: string): void {
     this.workingHours.push({ day, open, close });
   }
 
-  saveRestaurant(): void {
+  async saveRestaurant(): Promise<void> {
     this.error = ""
 
     if (!this.layoutFile)
@@ -154,21 +214,26 @@ export class AdminComponent implements OnInit{
       return
     }
 
-    this.loadLayoutFromJson(this.layoutFile)
-
-    if (this.kitchens.length < 1 || this.addToilet.length < 1 || this.tables.length < 3)
-    {
-      this.error = "At least 3 tables, 1 toilet and 1 kitchen must be in restaurant!"
-    }
-
-    this.checkLayout()
+    await this.loadLayoutFromJson(this.layoutFile)
 
     const layout: Layout = {
       tables: this.tables,
       kitchens: this.kitchens,
       toilets: this.toilets
     };
-    
+
+    console.log(this.tables.length)
+    console.log(layout.tables.length)
+
+    if (this.kitchens.length < 1 || this.toilets.length < 1 || this.tables.length < 3)
+    {
+      this.error = "At least 3 tables, 1 toilet and 1 kitchen must be in restaurant!"
+      this.resetLayout()
+      return
+    }
+
+    this.checkLayout()
+ 
     const newRestaurant = new Restaurant(
       this.name,
       this.type,
@@ -179,9 +244,16 @@ export class AdminComponent implements OnInit{
       this.workingHours
     );
 
-    this.restaurantService.addRestaurant(newRestaurant).subscribe(response => {
-      console.log('Restaurant added successfully', response);
-    });
+    if(!this.addWorkingHours())
+      return
+
+    if (this.error == "")
+    {
+      this.restaurantService.addRestaurant(newRestaurant).subscribe((data:any) => {
+        alert(data.msg)
+        window.location.reload()
+      });
+    }
   }
 
 
@@ -337,7 +409,8 @@ export class AdminComponent implements OnInit{
     this.kitchens = []
     this.toilets = []
     this.tables = []
-    
+    this.workingHours = []
+    this.workingHoursText = ""
   }
 
   logout()

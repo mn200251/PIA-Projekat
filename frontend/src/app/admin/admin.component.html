@@ -145,10 +145,8 @@
 
                 Layout: <input type="file" (change)="onFileSelected($event)">
 
-                <div>
-                Working Hours: 
-                <button type="button" (click)="addWorkingHours('Monday', '08:00', '18:00')">Add Working Hours</button>
-                </div>
+                Working Hours - "Day,StartTime,EndTime;": 
+                <textarea [(ngModel)]="workingHoursText" name="workingHoursText" required></textarea>
 
                 <br>
 

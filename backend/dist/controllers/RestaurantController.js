@@ -49,7 +49,7 @@ class RestaurantController {
                 res.json({ msg: 'Success!' });
             }
             catch (error) {
-                res.send(error);
+                res.json({ msg: error });
             }
         });
         // Get all restaurants
