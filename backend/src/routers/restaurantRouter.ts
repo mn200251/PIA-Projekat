@@ -9,7 +9,7 @@ restaurantRouter
 
 restaurantRouter
     .route("/getRestaurants")
-    .post((req, res) => new RestaurantController().getRestaurants(req, res));
+    .get((req, res) => new RestaurantController().getRestaurants(req, res));
 
 
 export default restaurantRouter;

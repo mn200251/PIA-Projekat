@@ -107,3 +107,47 @@ body {
   td button:last-child {
     margin-right: 0; /* Remove margin from the last button */
   }
+
+  .restaurant-form {
+    max-width: 400px; /* Adjust width as needed */
+    margin: auto;
+}
+
+.restaurant-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.restaurant-form input[type="text"],
+.restaurant-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.restaurant-form textarea {
+    height: 150px; /* Adjust height as needed */
+}
+
+.restaurant-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.restaurant-form button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}

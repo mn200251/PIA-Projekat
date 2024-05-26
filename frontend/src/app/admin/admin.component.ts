@@ -52,6 +52,10 @@ export class AdminComponent implements OnInit{
       }
 
     })
+
+    this.restaurantService.getRestaurants().subscribe(data => {
+      this.restaurants = data
+    })
   }
 
   page: number = 1
@@ -124,6 +128,8 @@ export class AdminComponent implements OnInit{
   workingHours: WorkingHours[] = [];
   layoutFile: File | null = null
   error: string = ""
+
+  restaurants: Restaurant[] = []
 
   DaysOfWeek: string[] = [
     'Monday',
