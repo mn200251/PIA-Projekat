@@ -44,7 +44,10 @@ let User = new Schema({
   },
   accountStatus: {
     type: Number,
-  }
+  },
+  worksAt: {
+    type: String,
+  },
 });
 
 export default mongoose.model("User", User, "Users");

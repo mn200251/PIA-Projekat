@@ -49,7 +49,7 @@ export class UserController {
         securityQuestion,
         securityAnswer,
         creditCardNumber,
-        accountStatus
+        accountStatus,
       });
 
       await newUser.save();

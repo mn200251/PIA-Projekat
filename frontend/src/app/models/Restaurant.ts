@@ -42,7 +42,12 @@ export interface Table {
       public description: string,
       public contactPerson: string,
       public layout: Layout,
-      public workingHours: WorkingHours[]
+      public workingHours: WorkingHours[],
+      public waiters: Waiter[] = [],
     ) {}
+  }
+
+  export class Waiter{
+
   }
   

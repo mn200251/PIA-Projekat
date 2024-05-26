@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Restaurant } from '../models/Restaurant';
+import { Restaurant, Waiter } from '../models/Restaurant';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -17,5 +17,10 @@ export class RestaurantService {
   getRestaurants()
   {
     return this.http.get<Restaurant[]>('http://localhost:4000/restaurants/getRestaurants');
+  }
+
+  addWaiter(waiter: Waiter)
+  {
+    return this.http.post<string>('http://localhost:4000/restaurants/addWaiter', waiter);
   }
 }

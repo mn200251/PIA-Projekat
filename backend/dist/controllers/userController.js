@@ -56,7 +56,7 @@ class UserController {
                 securityQuestion,
                 securityAnswer,
                 creditCardNumber,
-                accountStatus
+                accountStatus,
             });
             yield newUser.save();
             return res.json({ msg: 'Sent registration request successfully!' });

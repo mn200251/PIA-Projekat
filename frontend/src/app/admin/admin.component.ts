@@ -67,6 +67,7 @@ export class AdminComponent implements OnInit{
   {
     this.page = newPage
     localStorage.setItem("page", newPage.toString())
+    window.location.reload()
   }
 
   updateInfo(user:User)
@@ -128,6 +129,7 @@ export class AdminComponent implements OnInit{
   workingHours: WorkingHours[] = [];
   layoutFile: File | null = null
   error: string = ""
+  newWaiter: User = new User()
 
   restaurants: Restaurant[] = []
 
@@ -408,6 +410,16 @@ export class AdminComponent implements OnInit{
         }
       }
     });
+  }
+
+  addWaiter()
+  {
+    this.restaurantService.addWaiter(this.newWaiter).subscribe((data:any) => {
+      alert(data.msg)
+
+      if(data.msg == "Success!")
+        window.location.reload()
+    })
   }
 
   resetLayout()

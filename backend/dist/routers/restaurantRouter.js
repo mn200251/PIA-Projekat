@@ -12,4 +12,7 @@ restaurantRouter
 restaurantRouter
     .route("/getRestaurants")
     .get((req, res) => new RestaurantController_1.RestaurantController().getRestaurants(req, res));
+restaurantRouter
+    .route("/addWaiter")
+    .post((req, res) => new RestaurantController_1.RestaurantController().addWaiter(req, res));
 exports.default = restaurantRouter;

@@ -47,6 +47,9 @@ let User = new Schema({
     },
     accountStatus: {
         type: Number,
-    }
+    },
+    worksAt: {
+        type: String,
+    },
 });
 exports.default = mongoose_1.default.model("User", User, "Users");

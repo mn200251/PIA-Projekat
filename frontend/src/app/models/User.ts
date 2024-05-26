@@ -13,11 +13,11 @@ export class User{
     profilePicure: any | null = null
     creditCardNumber: number = 0
 
+    worksAt: string = ""
     accountStatus: number = 0
     // 0  - requested
     // 1  - accepted
     // -1 - rejected
     // -2 - banned
 
-    // banned: boolean = false
 }
