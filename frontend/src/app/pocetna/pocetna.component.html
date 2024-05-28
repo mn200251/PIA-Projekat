@@ -26,8 +26,58 @@
   
   <div class="container">
   
+    <div id="loginForm" *ngIf="page == 0">
+      <h3>Home</h3>
+
+      Number of registered guests: {{this.numGuests}}<br>
+      Number of restaurants: {{this.numRestaurants}}<br><br>
+
+      <div>
+        <label>
+          Name:
+          <input type="text" [(ngModel)]="searchName" />
+        </label>
+        <label>
+          Address:
+          <input type="text" [(ngModel)]="searchAddress" />
+        </label>
+        <label>
+          Type:
+          <input type="text" [(ngModel)]="searchType" />
+        </label>
+      </div>
+    
+      <table>
+        <thead>
+          <tr>
+            <th (click)="setSort('name')">Name</th>
+            <th (click)="setSort('address')">Address</th>
+            <th (click)="setSort('type')">Type</th>
+            <th>Workers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let restaurant of sortedAndFilteredRestaurants">
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.address }}</td>
+            <td>{{ restaurant.type }}</td>
+            <td>
+              <ul>
+                <div *ngFor="let waiter of waiters">
+                  <div *ngIf="waiter.worksAt == restaurant.name">
+                    {{waiter.forename}} {{waiter.surname}}
+                  </div>
+                </div>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
     <div id="loginForm" *ngIf="page == 1">
-      <h4>Login</h4>
+      <h3>Login</h3>
   
       <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
       <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
@@ -39,7 +89,7 @@
     </div>
   
     <div id="registerForm" *ngIf="page == 2">
-      <h4>Register</h4>
+      <h3>Register</h3>
   
       <input type="text" name="username" placeholder="Username" [(ngModel)]="username">
       <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
@@ -62,7 +112,7 @@
     </div>
 
     <div id="resetForm" *ngIf="page == 3">
-        <h4>Reset password</h4><br>
+        <h3>Reset password</h3><br>
     
         <button (click)="navigateTo(31)">I know my password</button>&nbsp;&nbsp;
     
@@ -71,7 +121,7 @@
     </div>
 
     <div id="resetForm" *ngIf="page == 31">
-        <h4>Reset password</h4><br>
+        <h3>Reset password</h3><br>
     
         Username:
         <input type="text" name="username" [(ngModel)]="username">
@@ -92,7 +142,7 @@
     </div>
 
     <div id="resetForm" *ngIf="page == 321">
-        <h4>Reset password - Step 1</h4><br>
+        <h3>Reset password - Step 1</h3><br>
     
         Enter your username:
         <input type="text" name="username" [(ngModel)]="username">
@@ -104,7 +154,7 @@
     </div>
 
     <div id="resetForm" *ngIf="page == 322">
-        <h4>Reset password - Step 2</h4><br>
+        <h3>Reset password - Step 2</h3><br>
     
         "{{securityQuestion}}""
         <input type="text" name="userSecurityAnswer" [(ngModel)]="userSecurityAnswer">
@@ -116,7 +166,7 @@
     </div>
 
     <div id="resetForm" *ngIf="page == 323">
-        <h4>Reset password - Step 3</h4><br>
+        <h3>Reset password - Step 3</h3><br>
     
         New password:
         <input type="password" name="newPassword" [(ngModel)]="newPassword">
@@ -131,7 +181,6 @@
     </div>
 
   </div>
-
 
   
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

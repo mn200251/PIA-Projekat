@@ -1,18 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { RestaurantService } from '../services/restaurant.service';
+import { Restaurant } from '../models/Restaurant';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-pocetna',
   templateUrl: './pocetna.component.html',
   styleUrls: ['./pocetna.component.css']
 })
-export class PocetnaComponent {
+export class PocetnaComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router)
+  constructor(private userService: UserService, private router: Router, private restaurantService: RestaurantService)
   {
 
   }
+
+  ngOnInit(): void {
+    localStorage.removeItem("user")
+
+    this.restaurantService.getRestaurants().subscribe(data => {
+      this.numRestaurants = data.length
+
+      this.restaurants = data
+    })
+
+    this.userService.getUsers().subscribe(data => {
+      this.numGuests = data.filter(elem => {
+        if (elem.type == "guest")
+          return true
+        return false
+      }).length
+
+      this.waiters = data.filter(elem => {
+        if (elem.type == "waiter")
+          return true
+        return false
+      })
+    })
+  }
+
+
+
   page: number = 0
 
   username: string = ""
@@ -25,6 +55,14 @@ export class PocetnaComponent {
   confirmNewPassword: string = ""
 
   userSecurityAnswer: string = ""
+
+  restaurants: Restaurant[] = []
+  waiters: User[] = []
+  numGuests = 0
+  numRestaurants = 0
+  numReservations24 = 0
+  numReservations7 = 0
+  numReservations30 = 0
 
   navigateTo(newPage: number)
   {
@@ -57,6 +95,42 @@ export class PocetnaComponent {
     this.confirmNewPassword = ""
 
     this.userSecurityAnswer = ""
+  }
+
+  sortColumn: keyof Restaurant = 'name';
+  sortOrder: 'asc' | 'desc' = 'asc';
+
+  searchName: string = '';
+  searchAddress: string = '';
+  searchType: string = '';
+
+  get sortedAndFilteredRestaurants(): Restaurant[] {
+    return this.restaurants
+      .filter(restaurant => 
+        restaurant.name.toLowerCase().includes(this.searchName.toLowerCase()) &&
+        restaurant.address.toLowerCase().includes(this.searchAddress.toLowerCase()) &&
+        restaurant.type.toLowerCase().includes(this.searchType.toLowerCase())
+      )
+      .sort((a, b) => {
+        const valueA = a[this.sortColumn];
+        const valueB = b[this.sortColumn];
+        let comparison = 0;
+        if (valueA > valueB) {
+          comparison = 1;
+        } else if (valueA < valueB) {
+          comparison = -1;
+        }
+        return this.sortOrder === 'asc' ? comparison : -comparison;
+      });
+  }
+
+  setSort(column: keyof Restaurant): void {
+    if (this.sortColumn === column) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortOrder = 'asc';
+    }
   }
 
 
@@ -99,6 +173,7 @@ export class PocetnaComponent {
   email = ""
   profilePicure: any | null = null
   creditCardNumber: number | null = null
+  sortCriteria = "name"
 
 
   register()
