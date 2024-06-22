@@ -39,6 +39,7 @@ exports.RestaurantController = void 0;
 const express = __importStar(require("express"));
 const Restaurant_1 = __importDefault(require("../models/Restaurant"));
 const User_1 = __importDefault(require("../models/User"));
+const Reservation_1 = __importDefault(require("../models/Reservation"));
 const router = express.Router();
 class RestaurantController {
     constructor() {
@@ -101,6 +102,55 @@ class RestaurantController {
             });
             yield newUser.save();
             return res.json({ msg: 'Success!' });
+        });
+        this.addReservation = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                // Extract the date and time from req.body
+                const { date, time } = req.body;
+                // Calculate 3 hours after the extracted time
+                const startTime = new Date(`${date} ${time}`);
+                const endTime = new Date(startTime.getTime() + 3 * 60 * 60 * 1000);
+                const restaurantName = req.body.restaurantName;
+                // Find the restaurant
+                const restaurant = yield Restaurant_1.default.findOne({ name: restaurantName });
+                if (!restaurant) {
+                    return res.json({ msg: 'Restaurant not found' });
+                }
+                // Find all tables in the restaurant
+                let tables = Array.from(restaurant.layout.tables);
+                // Check if any table is available during the specified time
+                let isTableAvailable = false;
+                let tableId = null;
+                for (const table of tables) {
+                    const existingReservations = yield Reservation_1.default.find({
+                        restaurantName: restaurantName,
+                        tableId: table.id,
+                        $or: [
+                            { startTime: { $lt: endTime }, endTime: { $gt: startTime } },
+                            { startTime: { $lt: startTime }, endTime: { $gt: startTime } },
+                            { startTime: { $lt: endTime }, endTime: { $gt: endTime } }
+                        ]
+                    });
+                    if (existingReservations.length == 0) {
+                        console.log('Table available');
+                        isTableAvailable = true;
+                        tableId = table.id;
+                        console.log(table.id);
+                        break;
+                    }
+                }
+                if (!isTableAvailable) {
+                    return res.json({ msg: 'No available tables during the specified time' });
+                }
+                // Create a new reservation
+                const newReservation = new Reservation_1.default(req.body);
+                newReservation.tableId = tableId;
+                yield newReservation.save();
+                return res.json({ msg: 'Success!' });
+            }
+            catch (error) {
+                return res.json({ msg: error.message });
+            }
         });
     }
 }

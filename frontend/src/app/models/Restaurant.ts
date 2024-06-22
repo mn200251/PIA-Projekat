@@ -43,11 +43,6 @@ export interface Table {
       public contactPerson: string,
       public layout: Layout,
       public workingHours: WorkingHours[],
-      public waiters: Waiter[] = [],
     ) {}
-  }
-
-  export class Waiter{
-
   }
   

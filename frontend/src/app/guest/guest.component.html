@@ -61,7 +61,47 @@
     <div *ngIf="page == 2">
         <h3>Restaurants</h3><br>
 
-
-
+        <div>
+          <label>
+            Name:
+            <input type="text" [(ngModel)]="searchName" />
+          </label>
+          <label>
+            Address:
+            <input type="text" [(ngModel)]="searchAddress" />
+          </label>
+          <label>
+            Type:
+            <input type="text" [(ngModel)]="searchType" />
+          </label>
+        </div>
+      
+        <table>
+          <thead>
+            <tr>
+              <th (click)="setSort('name')">Name</th>
+              <th (click)="setSort('address')">Address</th>
+              <th (click)="setSort('type')">Type</th>
+              <th>Workers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let restaurant of sortedAndFilteredRestaurants">
+              <td (click)="restaurantDetails(restaurant)">{{ restaurant.name }}</td>
+              <td>{{ restaurant.address }}</td>
+              <td>{{ restaurant.type }}</td>
+              <td>
+                <ul>
+                  <div *ngFor="let waiter of waiters">
+                    <div *ngIf="waiter.worksAt == restaurant.name">
+                      {{waiter.forename}} {{waiter.surname}}
+                    </div>
+                  </div>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 </div>
 

@@ -133,7 +133,6 @@ export class PocetnaComponent implements OnInit {
     }
   }
 
-
   login()
   {
     if (this.username == "" || this.password == "")

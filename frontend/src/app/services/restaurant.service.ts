@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Restaurant, Waiter } from '../models/Restaurant';
+import { Restaurant } from '../models/Restaurant';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../models/User';
+import { Reservation } from '../models/Reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,13 @@ export class RestaurantService {
     return this.http.get<Restaurant[]>('http://localhost:4000/restaurants/getRestaurants');
   }
 
-  addWaiter(waiter: Waiter)
+  addWaiter(waiter: User)
   {
     return this.http.post<string>('http://localhost:4000/restaurants/addWaiter', waiter);
+  }
+
+  addReservation(reservation: Reservation)
+  {
+    return this.http.post<string>('http://localhost:4000/restaurants/addReservation', reservation);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { Restaurant } from '../models/Restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-guest',
@@ -10,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class GuestComponent implements OnInit {
 
-  constructor(private router:Router, private userService: UserService)
+  constructor(private router:Router, private userService: UserService, private restaurantService: RestaurantService)
   {
 
   }
@@ -36,18 +38,45 @@ export class GuestComponent implements OnInit {
         localStorage.removeItem("user")
         this.router.navigate([""]);
       }
-      
-
     }
     else
     {
       this.router.navigate([""]);
     }
+
+    this.restaurantService.getRestaurants().subscribe(data => {
+      this.restaurants = data
+    })
+
+    this.userService.getUsers().subscribe(data => {
+      this.waiters = data.filter(elem => {
+        if (elem.type == "waiter")
+          return true
+        return false
+      })
+    })
+  }
+
+  restaurantDetails(restaurant: Restaurant)
+  {
+    localStorage.setItem("restaurant", JSON.stringify(restaurant))
+
+    this.router.navigate(["restaurantInformation"]);
   }
 
   page: number = 1
   user: User = new User()
   error: string = ""
+
+  restaurants: Restaurant[] = []
+  waiters: User[] = []
+
+  sortColumn: keyof Restaurant = 'name';
+  sortOrder: 'asc' | 'desc' = 'asc';
+
+  searchName: string = '';
+  searchAddress: string = '';
+  searchType: string = '';
 
   navigateTo(newPage: number)
   {
@@ -74,6 +103,36 @@ export class GuestComponent implements OnInit {
         window.location.reload();
     })
   }
+
+  get sortedAndFilteredRestaurants(): Restaurant[] {
+    return this.restaurants
+      .filter(restaurant => 
+        restaurant.name.toLowerCase().includes(this.searchName.toLowerCase()) &&
+        restaurant.address.toLowerCase().includes(this.searchAddress.toLowerCase()) &&
+        restaurant.type.toLowerCase().includes(this.searchType.toLowerCase())
+      )
+      .sort((a, b) => {
+        const valueA = a[this.sortColumn];
+        const valueB = b[this.sortColumn];
+        let comparison = 0;
+        if (valueA > valueB) {
+          comparison = 1;
+        } else if (valueA < valueB) {
+          comparison = -1;
+        }
+        return this.sortOrder === 'asc' ? comparison : -comparison;
+      });
+  }
+
+  setSort(column: keyof Restaurant): void {
+    if (this.sortColumn === column) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortOrder = 'asc';
+    }
+  }
+
 
   logout()
   {

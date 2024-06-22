@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(1)">Profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(2)">Restaurants</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(3)">Reservations</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo(4)">Food delivery</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h3>Restaurant - {{ restaurant.name }}</h3><br>
+
+    <p>Address: {{ restaurant.address }}</p>
+    <p>Type: {{ restaurant.type }}</p>
+    <p>Phone: {{ restaurant.contactPerson }}</p>
+
+    <p>{{restaurant.description}}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Opens</th>
+                <th>Closes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let workingHour of restaurant.workingHours">
+                <td>{{ workingHour.day }}</td>
+                <td>{{ workingHour.open }}</td>
+                <td>{{ workingHour.close }}</td>
+            </tr>
+        </tbody>
+        
+    </table>
+   
+    <br>
+
+    <div>
+        <h2>Make a Reservation</h2>
+        <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="date">Date:</label>
+            <input type="date" id="date" formControlName="date" />
+          </div>
+          <div>
+            <label for="time">Time:</label>
+            <input type="time" id="time" formControlName="time" />
+          </div>
+          <div>
+            <label for="numberOfPeople">Number of People:</label>
+            <input type="number" id="numberOfPeople" formControlName="numberOfPeople"/>
+          </div>
+          <div>
+            <label for="additionalRequests">Additional Requests:</label>
+            <textarea id="additionalRequests" formControlName="additionalRequests"></textarea>
+          </div>
+          <button type="submit">Reserve</button>
+        </form>
+        <p>{{ feedbackMessage }}</p>
+      </div>
+
+</div>

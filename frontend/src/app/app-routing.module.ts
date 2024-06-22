@@ -5,6 +5,7 @@ import { GuestComponent } from './guest/guest.component';
 import { WaiterComponent } from './waiter/waiter.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { RestaurantInformationComponent } from './restaurant-information/restaurant-information.component';
 
 const routes: Routes = [
     {path: "", component: PocetnaComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
     {path: "waiter", component: WaiterComponent},
     {path: "adminlogin", component: AdminLoginComponent},
     {path: "admin", component: AdminComponent},
+    {path: "restaurantInformation", component: RestaurantInformationComponent},
 ];
 
 @NgModule({
