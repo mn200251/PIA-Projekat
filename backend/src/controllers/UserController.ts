@@ -1,5 +1,6 @@
 import * as express from "express";
 import User from "../models/User";
+import Reservation from "../models/Reservation";
 
 export class UserController {
 
@@ -175,5 +176,13 @@ export class UserController {
         await user.save();
 
         return res.json({ msg: 'Success!' });
+    }
+
+    getReservations = async (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+
+        const reservations = await Reservation.find({ username });
+
+        return res.json(reservations);
     }
 }

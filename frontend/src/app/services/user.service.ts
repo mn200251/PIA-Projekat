@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
+import { Reservation } from '../models/Reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -120,5 +121,14 @@ export class UserService {
     }
 
     return this.http.post<string>('http://localhost:4000/users/resetPasswordDontKnow', data);
+  }
+
+  getReservations(username: string)
+  {
+    const data= {
+      username: username,
+    }
+
+    return this.http.post<Reservation[]>('http://localhost:4000/users/getReservations', data);
   }
 }

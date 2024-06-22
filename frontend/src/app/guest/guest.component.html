@@ -103,5 +103,85 @@
           </tbody>
         </table>
     </div>
+
+    <div *ngIf="page == 3">
+      <h3>Active Reservations</h3><br>
+
+      <div *ngIf="activeReservations.length == 0">
+        <p>No active reservations</p>
+      </div>
+      <div *ngIf="activeReservations.length != 0">
+        <table>
+          <tr>
+              <th>Restaurant</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Size</th>
+              <th>Table</th>
+              <th>Additional Requests</th>
+          </tr>
+          <tr *ngFor="let reservation of activeReservations">
+              <td>
+                  <p>{{reservation.restaurantName}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.startTime.getDate()}}.{{reservation.startTime.getMonth() + 1}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.startTime.getHours()}}:{{reservation.startTime.getMinutes().toString().padStart(2, '0')}} - {{reservation.endTime.getHours()}}:{{reservation.endTime.getMinutes().toString().padStart(2, '0')}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.numberOfPeople}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.tableId}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.additionalRequests}}</p>
+              </td>
+          </tr>
+        </table>
+      </div>
+
+    <br>
+
+    <h3>Expired Reservations</h3><br>
+      
+      <div *ngIf="expiredReservations.length == 0">
+        <p>No expired reservations</p>
+      </div>
+      <div *ngIf="expiredReservations.length != 0">
+        <table>
+          <tr>
+              <th>Restaurant</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Size</th>
+              <th>Table</th>
+              <th>Additional Requests</th>
+          </tr>
+          <tr *ngFor="let reservation of expiredReservations">
+              <td>
+                  <p>{{reservation.restaurantName}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.startTime.getDate()}}.{{reservation.startTime.getMonth() + 1}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.startTime.getHours()}}:{{reservation.startTime.getMinutes().toString().padStart(2, '0')}} - {{reservation.endTime.getHours()}}:{{reservation.endTime.getMinutes().toString().padStart(2, '0')}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.numberOfPeople}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.tableId}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.additionalRequests}}</p>
+              </td>
+          </tr>
+        </table>
+      </div>
+    </div>
 </div>
 

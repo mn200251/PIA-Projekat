@@ -36,4 +36,8 @@ userRouter
     .route("/resetPasswordDontKnow")
     .post((req, res) => new UserController().resetPasswordDontKnow(req, res));
 
+userRouter
+    .route("/getReservations")
+    .post((req, res) => new UserController().getReservations(req, res));
+
 export default userRouter;

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const User_1 = __importDefault(require("../models/User"));
+const Reservation_1 = __importDefault(require("../models/Reservation"));
 class UserController {
     constructor() {
         this.login = (req, res) => {
@@ -144,6 +145,11 @@ class UserController {
             user.password = newPassword;
             yield user.save();
             return res.json({ msg: 'Success!' });
+        });
+        this.getReservations = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.body.username;
+            const reservations = yield Reservation_1.default.find({ username });
+            return res.json(reservations);
         });
     }
 }

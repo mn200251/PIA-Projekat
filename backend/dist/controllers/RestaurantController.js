@@ -132,10 +132,8 @@ class RestaurantController {
                         ]
                     });
                     if (existingReservations.length == 0) {
-                        console.log('Table available');
                         isTableAvailable = true;
                         tableId = table.id;
-                        console.log(table.id);
                         break;
                     }
                 }

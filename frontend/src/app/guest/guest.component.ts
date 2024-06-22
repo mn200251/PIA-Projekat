@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Restaurant } from '../models/Restaurant';
 import { RestaurantService } from '../services/restaurant.service';
+import { Reservation } from '../models/Reservation';
 
 @Component({
   selector: 'app-guest',
@@ -48,11 +49,36 @@ export class GuestComponent implements OnInit {
       this.restaurants = data
     })
 
+    
+
     this.userService.getUsers().subscribe(data => {
       this.waiters = data.filter(elem => {
         if (elem.type == "waiter")
           return true
         return false
+      })
+    })
+
+    this.userService.getReservations(this.user.username).subscribe(data => {
+      for (let i = 0; i < data.length; i++)
+      {
+        data[i].startTime = new Date(data[i].startTime)
+        data[i].endTime = new Date(data[i].endTime)
+      }
+
+      this.activeReservations = data.filter(elem => {
+        if (new Date(elem.endTime) > new Date())
+          return true
+        return false
+      }).sort((a, b) => {
+        return new Date(a.startTime) < new Date(b.startTime) ? -1 : 1
+      })
+      this.expiredReservations = data.filter(elem => {
+        if (new Date(elem.endTime) < new Date())
+          return true
+        return false
+      }).sort((a, b) => {
+        return new Date(a.startTime) < new Date(b.startTime) ? -1 : 1
       })
     })
   }
@@ -77,6 +103,9 @@ export class GuestComponent implements OnInit {
   searchName: string = '';
   searchAddress: string = '';
   searchType: string = '';
+
+  expiredReservations: Reservation[] = []
+  activeReservations: Reservation[] = []
 
   navigateTo(newPage: number)
   {
