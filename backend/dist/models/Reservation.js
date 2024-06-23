@@ -28,7 +28,10 @@ const mongoose_1 = __importStar(require("mongoose"));
 exports.ReservationSchema = new mongoose_1.Schema({
     username: { type: String, required: true },
     restaurantName: { type: String, required: true },
-    tableId: { type: Number, required: true },
+    tableId: { type: Number, default: null },
+    confirmedByWaiter: { type: String, required: false },
+    cancelledByUser: { type: Boolean, default: false },
+    cancelledByWaiter: { type: Boolean, default: false },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
     numberOfPeople: { type: Number, required: true },

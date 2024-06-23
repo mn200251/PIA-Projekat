@@ -114,15 +114,18 @@
         <table>
           <tr>
               <th>Restaurant</th>
+              <th>Address</th>
               <th>Date</th>
               <th>Time</th>
-              <th>Size</th>
-              <th>Table</th>
               <th>Additional Requests</th>
+              <th>Cancel Reservation</th>
           </tr>
           <tr *ngFor="let reservation of activeReservations">
               <td>
                   <p>{{reservation.restaurantName}}</p>
+              </td>
+              <td>
+                <p>{{findRestaurantAddress(reservation.restaurantName)}}</p>
               </td>
               <td>
                   <p>{{reservation.startTime.getDate()}}.{{reservation.startTime.getMonth() + 1}}</p>
@@ -131,13 +134,18 @@
                   <p>{{reservation.startTime.getHours()}}:{{reservation.startTime.getMinutes().toString().padStart(2, '0')}} - {{reservation.endTime.getHours()}}:{{reservation.endTime.getMinutes().toString().padStart(2, '0')}}</p>
               </td>
               <td>
-                  <p>{{reservation.numberOfPeople}}</p>
-              </td>
-              <td>
-                  <p>{{reservation.tableId}}</p>
-              </td>
-              <td>
                   <p>{{reservation.additionalRequests}}</p>
+              </td>
+              <td>
+                <ng-template [ngIf]="!isCancelButtonDisabled(reservation)">
+                  <button (click)="cancelReservation(reservation)" [disabled]="isCancelButtonDisabled(reservation)">Cancel</button>
+                </ng-template>
+                <ng-template [ngIf]="tooCloseToCancel(reservation)">
+                  <p>Reservation too close to cancel</p>
+                </ng-template>
+                <ng-template [ngIf]="alreadyCancelled(reservation)">
+                  <p>Reservation already cancelled</p>
+                </ng-template>
               </td>
           </tr>
         </table>
@@ -154,10 +162,9 @@
         <table>
           <tr>
               <th>Restaurant</th>
+              <th>Address</th>
               <th>Date</th>
               <th>Time</th>
-              <th>Size</th>
-              <th>Table</th>
               <th>Additional Requests</th>
           </tr>
           <tr *ngFor="let reservation of expiredReservations">
@@ -165,16 +172,13 @@
                   <p>{{reservation.restaurantName}}</p>
               </td>
               <td>
+                <p>{{findRestaurantAddress(reservation.restaurantName)}}</p>
+              </td>
+              <td>
                   <p>{{reservation.startTime.getDate()}}.{{reservation.startTime.getMonth() + 1}}</p>
               </td>
               <td>
                   <p>{{reservation.startTime.getHours()}}:{{reservation.startTime.getMinutes().toString().padStart(2, '0')}} - {{reservation.endTime.getHours()}}:{{reservation.endTime.getMinutes().toString().padStart(2, '0')}}</p>
-              </td>
-              <td>
-                  <p>{{reservation.numberOfPeople}}</p>
-              </td>
-              <td>
-                  <p>{{reservation.tableId}}</p>
               </td>
               <td>
                   <p>{{reservation.additionalRequests}}</p>

@@ -105,6 +105,7 @@ export class RestaurantController {
             let isTableAvailable = false;
             let tableId = null;
 
+            /*
             for (const table of tables as any[]) {
                 const existingReservations = await Reservation.find({
                     restaurantName: restaurantName,
@@ -126,10 +127,11 @@ export class RestaurantController {
             if (!isTableAvailable) {
                 return res.json({ msg: 'No available tables during the specified time' });
             }
+            */
     
             // Create a new reservation
             const newReservation = new Reservation(req.body);
-            newReservation.tableId = tableId;
+            // newReservation.tableId = tableId;
 
             await newReservation.save();
             return res.json({ msg: 'Success!' });

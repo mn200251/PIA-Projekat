@@ -201,4 +201,27 @@ export class UserController {
 
         return res.json(reservations);
     }
+
+    cancelReservation = async (req: express.Request, res: express.Response) => {
+        let reservationID = req.body._id
+
+        const reservation = await Reservation.findOne({ _id: reservationID });
+
+        if (!reservation)
+        {
+            return res.json({ msg: 'Reservation not found!' });
+        }
+
+        if (reservation.cancelledByUser == true)
+        {
+            return res.json({ msg: 'Reservation already cancelled!' });
+        }
+
+        reservation.cancelledByUser = true
+
+        await reservation.save();
+
+        return res.json({ msg: 'Success!' });
+
+    }
 }

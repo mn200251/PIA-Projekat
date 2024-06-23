@@ -131,4 +131,9 @@ export class UserService {
 
     return this.http.post<Reservation[]>('http://localhost:4000/users/getReservations', data);
   }
+
+  cancelReservation(reservation: Reservation)
+  {
+    return this.http.post<string>('http://localhost:4000/users/cancelReservation', reservation);
+  }
 }

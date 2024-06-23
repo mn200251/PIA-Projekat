@@ -8,4 +8,8 @@ export interface Reservation {
     endTime: Date;
     numberOfPeople: number;
     additionalRequests: string;
+
+    confirmedByWaiter: string ;
+    cancelledByUser: boolean;
+    cancelledByWaiter: boolean;
   }

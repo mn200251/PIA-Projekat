@@ -163,6 +163,52 @@ export class GuestComponent implements OnInit {
   }
 
 
+  isCancelButtonDisabled(reservation: Reservation): boolean {
+    
+    const expirationTime = new Date(reservation.startTime.getTime() + (45 * 60000)); // Adding 45 minutes to the start time
+    console.log((expirationTime < new Date() && reservation.cancelledByUser == false && reservation.cancelledByWaiter == false));
+    return expirationTime < new Date() || reservation.cancelledByUser == true || reservation.cancelledByWaiter == true;
+    //return false;
+  }
+
+  tooCloseToCancel(reservation: Reservation): boolean {
+    const expirationTime = new Date(reservation.startTime.getTime() + (45 * 60000)); // Adding 45 minutes to the start time
+    return expirationTime < new Date();
+  }
+
+  alreadyCancelled(reservation: Reservation): boolean {
+    return reservation.cancelledByUser == true || reservation.cancelledByWaiter == true;
+  }
+
+  findRestaurantAddress(restaurantName: string): string {
+    const restaurant = this.restaurants.find(restaurant => restaurant.name === restaurantName);
+    return restaurant?.address ?? '';
+  }
+
+  cancelReservation(reservation: Reservation)
+  {
+    if (this.isCancelButtonDisabled(reservation)) {
+      alert("You can't cancel reservation 45 minutes before it starts!")
+      return;
+    }
+
+    if(reservation.cancelledByUser == true)
+    {
+        alert("This reservation has already been cancelled!")
+        return;
+    }
+
+    if (confirm("Are you sure you want to cancel this reservation?"))
+    {
+      this.userService.cancelReservation(reservation).subscribe((data:any) => {
+        alert(data.msg)
+        window.location.reload();
+      })
+    }
+
+  }
+
+
   logout()
   {
     localStorage.removeItem("page")

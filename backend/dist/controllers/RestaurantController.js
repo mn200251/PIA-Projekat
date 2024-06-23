@@ -121,8 +121,9 @@ class RestaurantController {
                 // Check if any table is available during the specified time
                 let isTableAvailable = false;
                 let tableId = null;
-                for (const table of tables) {
-                    const existingReservations = yield Reservation_1.default.find({
+                /*
+                for (const table of tables as any[]) {
+                    const existingReservations = await Reservation.find({
                         restaurantName: restaurantName,
                         tableId: table.id,
                         $or: [
@@ -131,18 +132,21 @@ class RestaurantController {
                             { startTime: { $lt: endTime }, endTime: { $gt: endTime } }
                         ]
                     });
+        
                     if (existingReservations.length == 0) {
                         isTableAvailable = true;
                         tableId = table.id;
                         break;
                     }
                 }
+        
                 if (!isTableAvailable) {
                     return res.json({ msg: 'No available tables during the specified time' });
                 }
+                */
                 // Create a new reservation
                 const newReservation = new Reservation_1.default(req.body);
-                newReservation.tableId = tableId;
+                // newReservation.tableId = tableId;
                 yield newReservation.save();
                 return res.json({ msg: 'Success!' });
             }

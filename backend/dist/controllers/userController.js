@@ -184,6 +184,19 @@ class UserController {
             const reservations = yield Reservation_1.default.find({ username });
             return res.json(reservations);
         });
+        this.cancelReservation = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let reservationID = req.body._id;
+            const reservation = yield Reservation_1.default.findOne({ _id: reservationID });
+            if (!reservation) {
+                return res.json({ msg: 'Reservation not found!' });
+            }
+            if (reservation.cancelledByUser == true) {
+                return res.json({ msg: 'Reservation already cancelled!' });
+            }
+            reservation.cancelledByUser = true;
+            yield reservation.save();
+            return res.json({ msg: 'Success!' });
+        });
     }
 }
 exports.UserController = UserController;

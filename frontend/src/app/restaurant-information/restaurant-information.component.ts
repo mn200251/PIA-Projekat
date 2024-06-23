@@ -96,8 +96,8 @@ export class RestaurantInformationComponent implements OnInit {
     const workingHours = this.restaurant.workingHours.find((hours:WorkingHours) => hours.day.toLowerCase() === dayOfWeek);
 
     if (!workingHours) {
-      alert("The restaurant is closed on the selected day.")
-      this.feedbackMessage = 'The restaurant is closed on the selected day.';
+      alert("The restaurant is closed at that time.")
+      this.feedbackMessage = 'The restaurant is closed at that time.';
       return;
     }
     
