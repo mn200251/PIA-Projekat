@@ -1,14 +1,17 @@
 import * as express from "express";
 import User from "../models/User";
 import Reservation from "../models/Reservation";
+import * as crypto from "crypto";
 
 export class UserController {
 
     login = (req: express.Request, res: express.Response) => {
       let username = req.body.username;
       let password = req.body.password;
-  
-      User.findOne({ username: username, password: password})
+
+      const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+
+      User.findOne({ username: username, password: hashedPassword})
         .then((user) => {
           res.json(user);
         })
@@ -37,9 +40,12 @@ export class UserController {
       if (existingUser)
         return res.json({ msg: 'User already exists!' });
 
+      // Encrypt the password
+      const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+
       const newUser = new User({
         username,
-        password,
+        password: hashedPassword,
         forename,
         surname,
         sex,
@@ -54,7 +60,7 @@ export class UserController {
       });
 
       await newUser.save();
-      return res.json({ msg: 'Sent registration request successfully!' });
+      return res.json({ msg: 'Success!' });
     }
 
     updateInfo = async (req: express.Request, res: express.Response) => {
@@ -133,12 +139,20 @@ export class UserController {
             return res.json({ msg: 'User not found!' });
         }
 
-        if (user.password != oldPassword)
+        const oldHashedPassword = crypto.createHash('sha256').update(oldPassword).digest('hex');
+        const newHashedPassword = crypto.createHash('sha256').update(newPassword).digest('hex');
+
+        if (oldHashedPassword == newHashedPassword)
+        {
+            return res.json({ msg: "New password can not be same as old password!" });
+        }
+
+        if (user.password != oldHashedPassword)
         {
             return res.json({ msg: 'Incorrect password for user!' });
         }
 
-        user.password = newPassword
+        user.password = newHashedPassword
 
         await user.save();
 
@@ -164,6 +178,8 @@ export class UserController {
 
         let newPassword = req.body.newPassword
 
+        const newHashedPassword = crypto.createHash('sha256').update(newPassword).digest('hex');
+
         const user = await User.findOne({ username });
 
         if (!user) // should never happen!
@@ -171,7 +187,7 @@ export class UserController {
             return res.json({ msg: 'User not found!' });
         }
 
-        user.password = newPassword
+        user.password = newHashedPassword
 
         await user.save();
 

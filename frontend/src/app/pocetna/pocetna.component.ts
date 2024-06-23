@@ -238,8 +238,13 @@ export class PocetnaComponent implements OnInit {
           // this.profilePicure,
           this.creditCardNumber)
           .subscribe((data:any) => {
-            this.clear()
             alert(data.msg)
+            if (data.msg == "Success!")
+            {
+              this.clear()
+              this.navigateTo(1)
+            }
+
         })
       }
 
@@ -262,11 +267,13 @@ export class PocetnaComponent implements OnInit {
       return;
     }
 
+    /*
     if (this.oldPassword == this.newPassword)
     {
       this.error = "New password can not be same as old password!";
       return;
     }
+    */
 
     this.userService.resetPasswordKnow(this.username, this.oldPassword, this.newPassword).subscribe((data:any) => {
       alert(data.msg)
