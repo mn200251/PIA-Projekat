@@ -175,6 +175,72 @@ export class PocetnaComponent implements OnInit {
   sortCriteria = "name"
 
 
+  validatePassword(pw: string): boolean {
+    const password = pw;
+
+    const validators = [
+      this.isSizeBetween6And10,
+      this.hasAtLeastOneCapitalLetter,
+      this.hasAtLeastThreeSmallLetters,
+      this.hasAtLeastOneNumber,
+      this.hasAtLeastOneSpecialCharacter,
+      this.startsWithLetter
+    ];
+
+    for (const validator of validators) {
+      const validationResult = validator(password);
+      if (validationResult !== true) {
+        this.error = validationResult;
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  isSizeBetween6And10(password: string): string | true {
+    if (password.length >= 6 && password.length <= 10) {
+      return true;
+    }
+    return 'Password must be between 6 and 10 characters.';
+  }
+
+  hasAtLeastOneCapitalLetter(password: string): string | true {
+    if (/[A-Z]/.test(password)) {
+      return true;
+    }
+    return 'Password must contain at least one capital letter.';
+  }
+
+  hasAtLeastThreeSmallLetters(password: string): string | true {
+    const match = password.match(/[a-z]/g);
+    if (match && match.length >= 3) {
+      return true;
+    }
+    return 'Password must contain at least three small letters.';
+  }
+
+  hasAtLeastOneNumber(password: string): string | true {
+    if (/\d/.test(password)) {
+      return true;
+    }
+    return 'Password must contain at least one number.';
+  }
+
+  hasAtLeastOneSpecialCharacter(password: string): string | true {
+    if (/[\W_]/.test(password)) {
+      return true;
+    }
+    return 'Password must contain at least one special character.';
+  }
+
+  startsWithLetter(password: string): string | true {
+    if (/^[A-Za-z]/.test(password)) {
+      return true;
+    }
+    return 'Password must start with a letter.';
+  }
+
   register()
   {
     this.type = "guest"
@@ -187,11 +253,15 @@ export class PocetnaComponent implements OnInit {
     }
 
     // check if password is correct format
-    const passwordPattern = /^(?=[A-Za-z])(?=.*[A-Z])(?=(?:.*[a-z]){3,})(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,10}$/
-    ;
+    //const passwordPattern = /^(?=[A-Za-z])(?=.*[A-Z])(?=(?:.*[a-z]){3,})(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,10}$/;
+    //const passwordPattern = /^[A-Za-z](?=.*[A-Z])(?=.*[a-z]{3,})(?=.*\d)(?=.*[\W_]).{5,9}$/;
 
-    if (passwordPattern.test(this.password)) {
-      this.error = "Password must be 6-10 characters long, start with a letter, contain at least 1 capital letter, at least 3 small letters, 1 number, and 1 special character.";
+    //if (passwordPattern.test(this.password)) {
+    //  this.error = "Password must be 6-10 characters long, start with a letter, contain at least 1 capital letter, at least 3 small letters, 1 number, and 1 special character.";
+    //  return;
+    //}
+    if (!this.validatePassword(this.password))
+    {
       return;
     }
 
