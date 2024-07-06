@@ -59,9 +59,90 @@
     </div>
 
     <div *ngIf="page == 2">
-        <h3>Restaurants</h3><br>
+        <h3>Unfilled Reservations</h3><br>
+          <table>
+            <tr>
+              <th>User</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Additional requests</th>
+              <th>Available tables</th>
+              <th>Accept request</th>
+              <th>Reject request</th>
+            </tr>
+            <tr *ngFor="let reservation of pendingReservations">
+              <td>
+                <p>{{reservation.username}}</p>
+              </td>
+              <td>
+                <p>{{reservation.startTime.getDate()}}.{{reservation.startTime.getMonth() + 1}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.startTime.getHours()}}:{{reservation.startTime.getMinutes().toString().padStart(2, '0')}} - {{reservation.endTime.getHours()}}:{{reservation.endTime.getMinutes().toString().padStart(2, '0')}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.additionalRequests}}</p>
+              </td>
+              <td>
+                <select [(ngModel)]="reservation.tableId">
+                  <option *ngFor="let table of reservation.availableTables" [value]="table">{{table}}</option>
+                </select>
+              </td>
+              <td>
+                <button (click)="confirmReservation(reservation)">Accept</button>
+              </td>
+              <td>
+                <button (click)="rejectReservation(reservation)">Reject</button>
+              </td>
+            </tr>
 
+        </table>
+        
+        <br>
 
+        <h3>Confirmed Reservations</h3><br>
+          <table>
+            <tr>
+              <th>User</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Additional requests</th>
+              <th>Showed up</th>
+              <th>Extend time</th>
+            </tr>
+            <tr *ngFor="let reservation of acceptedReservations">
+              <td>
+                <p>{{reservation.username}}</p>
+              </td>
+              <td>
+                <p>{{reservation.startTime.getDate()}}.{{reservation.startTime.getMonth() + 1}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.startTime.getHours()}}:{{reservation.startTime.getMinutes().toString().padStart(2, '0')}} - {{reservation.endTime.getHours()}}:{{reservation.endTime.getMinutes().toString().padStart(2, '0')}}</p>
+              </td>
+              <td>
+                  <p>{{reservation.additionalRequests}}</p>
+              </td>
+              
+              <td>
+                <div *ngIf="reservation.showedUp == 0">
+                  <button (click)="showedUp(reservation, 1)" class="btn btn-success">Yes</button>
+                  <button (click)="showedUp(reservation, 0)" class="btn btn-danger">No</button>
+                </div>
+                <div *ngIf="reservation.showedUp == 1">
+                  <p>Yes</p>
+                </div>
+                <div *ngIf="reservation.showedUp == -1">
+                  <p>No</p>
+                </div>
+              </td>
 
-</div>
+              <td>
+                <button (click)="extendTime(reservation)">Extend Time</button>
+              </td>
+            </tr>
+
+        </table>
+    </div>
+  </div>
 

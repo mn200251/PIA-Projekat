@@ -10,6 +10,9 @@ export interface Reservation {
     additionalRequests: string;
 
     confirmedByWaiter: string ;
-    cancelledByUser: boolean;
+    // cancelledByUser: boolean;
     cancelledByWaiter: boolean;
+    showedUp: number;
+
+    availableTables: number[];
   }

@@ -64,3 +64,12 @@ body {
   .error {
     color: red;
   }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    cursor: pointer;
+    background-color: #f2f2f2;
+  }

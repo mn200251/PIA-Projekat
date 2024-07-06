@@ -136,16 +136,18 @@
               <td>
                   <p>{{reservation.additionalRequests}}</p>
               </td>
-              <td>
+              <td><!--
                 <ng-template [ngIf]="!isCancelButtonDisabled(reservation)">
                   <button (click)="cancelReservation(reservation)" [disabled]="isCancelButtonDisabled(reservation)">Cancel</button>
-                </ng-template>
-                <ng-template [ngIf]="tooCloseToCancel(reservation)">
-                  <p>Reservation too close to cancel</p>
-                </ng-template>
+                </ng-template>-->
                 <ng-template [ngIf]="alreadyCancelled(reservation)">
                   <p>Reservation already cancelled</p>
                 </ng-template>
+                <!--
+                <ng-template [ngIf]="tooCloseToCancel(reservation)">
+                  <p>Reservation too close to cancel</p>
+                </ng-template>
+                -->
               </td>
           </tr>
         </table>

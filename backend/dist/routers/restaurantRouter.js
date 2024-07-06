@@ -18,4 +18,19 @@ restaurantRouter
 restaurantRouter
     .route("/addReservation")
     .post((req, res) => new RestaurantController_1.RestaurantController().addReservation(req, res));
+restaurantRouter
+    .route("/getReservations")
+    .get((req, res) => new RestaurantController_1.RestaurantController().getReservations(req, res));
+restaurantRouter
+    .route("/getAvailableTables")
+    .post((req, res) => new RestaurantController_1.RestaurantController().getAvailableTables(req, res));
+restaurantRouter
+    .route("/confirmReservation")
+    .post((req, res) => new RestaurantController_1.RestaurantController().confirmReservation(req, res));
+restaurantRouter
+    .route("/rejectReservation")
+    .post((req, res) => new RestaurantController_1.RestaurantController().rejectReservation(req, res));
+restaurantRouter
+    .route("/showedUp")
+    .post((req, res) => new RestaurantController_1.RestaurantController().showedUp(req, res));
 exports.default = restaurantRouter;

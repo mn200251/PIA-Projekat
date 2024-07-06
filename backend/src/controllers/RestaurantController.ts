@@ -140,4 +140,144 @@ export class RestaurantController {
             return res.json({ msg: (error as Error).message });
         }
     }
+
+    getReservations = async (req: express.Request, res: express.Response) => {
+
+        const reservations = await Reservation.find();
+        return res.json(reservations);
+    }
+
+    getAvailableTables = async (req: express.Request, res: express.Response) => {
+        const restaurantName = req.body.restaurantName;
+        const numberOfPeople = req.body.numberOfPeople;
+        const startTime = req.body.startTime;
+        const endTime = req.body.endTime;
+
+        const restaurant = await Restaurant.findOne({ name: restaurantName });
+        if (!restaurant) {
+            return res.json({ msg: 'Restaurant not found!' });
+        }
+
+        let tables: any[] = Array.from(restaurant.layout.tables);
+        let availableTables: any[] = [];
+
+        for (const table of tables as any[]) {
+            const existingReservations = await Reservation.find({
+                restaurantName: restaurantName,
+                tableId: table.id,
+                $or: [
+                    { startTime: { $lt: endTime }, endTime: { $gt: startTime } },
+                    { startTime: { $lt: startTime }, endTime: { $gt: startTime } },
+                    { startTime: { $lt: endTime }, endTime: { $gt: endTime } }
+                ]
+            });
+
+            if (existingReservations.length == 0) {
+                availableTables.push(table.id);
+            }
+        }
+
+        return res.json(availableTables);
+    }
+
+    confirmReservation = async (req: express.Request, res: express.Response) => {
+        
+        const reservation = await Reservation.findOne( 
+            { username: req.body.username, restaurantName: req.body.restaurantName, 
+                startTime: req.body.startTime, endTime: req.body.endTime, 
+                numberOfPeople: req.body.numberOfPeople, 
+                additionalRequests: req.body.additionalRequests
+            }
+        );
+
+        if (!reservation) {
+            return res.json({ msg: 'Reservation not found!' });
+        }
+
+        // check if the reservation is already accepted
+        if (reservation.confirmedByWaiter) {
+            return res.json({ msg: 'Reservation is already accepted!' });
+        }
+
+        // check if table is still available
+        const targetTable = req.body.tableId;
+        const restaurantName = reservation.restaurantName;
+        const startTime = reservation.startTime;
+        const endTime = reservation.endTime;
+
+
+        console.log(targetTable);
+        const existingReservations = await Reservation.find({
+            restaurantName: restaurantName,
+            tableId: targetTable,
+            $or: [
+            { startTime: { $lt: endTime }, endTime: { $gt: startTime } },
+            { startTime: { $lt: startTime }, endTime: { $gt: startTime } },
+            { startTime: { $lt: endTime }, endTime: { $gt: endTime } }
+            ],
+            confirmedByWaiter: { $ne: "" }
+        });
+
+        if (existingReservations.length > 0) {
+            return res.json({ msg: 'Table is not available anymore!' });
+        }
+        //
+
+        reservation.confirmedByWaiter = req.body.confirmedByWaiter;
+        reservation.tableId = targetTable;
+        await reservation.save();
+        return res.json({ msg: 'Success!' });
+    }
+
+    rejectReservation = async (req: express.Request, res: express.Response) => {
+        const reservation = await Reservation.findOne( 
+            { username: req.body.username, restaurantName: req.body.restaurantName, 
+                startTime: req.body.startTime, endTime: req.body.endTime, 
+                numberOfPeople: req.body.numberOfPeople, 
+                additionalRequests: req.body.additionalRequests
+            }
+        );
+
+        if (!reservation) {
+            return res.json({ msg: 'Reservation not found!' });
+        }
+
+        // check if the reservation is already rejected
+        if (reservation.cancelledByWaiter) {
+            return res.json({ msg: 'Reservation is already rejected!' });
+        }
+
+        reservation.cancelledByWaiter = true;
+        await reservation.save();
+
+        return res.json({ msg: 'Success!' });
+
+    }
+
+    showedUp = async (req: express.Request, res: express.Response) => {
+    
+        const reservation = await Reservation.findOne( 
+            { username: req.body.username, restaurantName: req.body.restaurantName, 
+                startTime: req.body.startTime, endTime: req.body.endTime, 
+                numberOfPeople: req.body.numberOfPeople, 
+                additionalRequests: req.body.additionalRequests
+            }
+        );
+
+        if (!reservation) {
+            return res.json({ msg: 'Reservation not found!' });
+        }
+
+        // check if the reservation is already accepted
+        if (reservation.showedUp == 1) {
+            return res.json({ msg: 'Guests already confirmed to have shown up!' });
+        }
+        if (reservation.showedUp == -1) {
+            return res.json({ msg: 'Guests already confirmed not to have shown up!' });
+        }
+
+        reservation.showedUp = req.body.showedUp;
+        await reservation.save();
+        return res.json({ msg: 'Success!' });
+    }
 }

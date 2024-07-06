@@ -36,5 +36,6 @@ exports.ReservationSchema = new mongoose_1.Schema({
     endTime: { type: Date, required: true },
     numberOfPeople: { type: Number, required: true },
     additionalRequests: { type: String, required: false },
+    showedUp: { type: Number, default: 0 }
 });
 exports.default = mongoose_1.default.model("Reservation", exports.ReservationSchema, "Reservations");

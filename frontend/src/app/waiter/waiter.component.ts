@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { Reservation } from '../models/Reservation';
+import { RestaurantService } from '../services/restaurant.service';
+import { Restaurant } from '../models/Restaurant';
 
 @Component({
   selector: 'app-waiter',
@@ -9,7 +12,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./waiter.component.css']
 })
 export class WaiterComponent {
-  constructor(private router:Router, private userService: UserService)
+  constructor(private router:Router, private userService: UserService, private restaurantService: RestaurantService)
   {
 
   }
@@ -42,15 +45,50 @@ export class WaiterComponent {
     {
       this.router.navigate([""]);
     }
+
+    this.restaurantService.getReservations().subscribe(data => {
+      this.reservations = data
+      .filter((reservation: Reservation) => 
+        reservation.restaurantName === this.user.worksAt)
+      .filter((reservation: Reservation) =>
+        {
+          return reservation.cancelledByWaiter == false
+        })
+      .sort((a: Reservation, b: Reservation) => {
+          return a.startTime < b.startTime ? 1 : -1;
+        })
+
+      this.reservations.forEach((reservation: Reservation) => {
+        reservation.startTime = new Date(reservation.startTime)
+        reservation.endTime = new Date(reservation.endTime)
+
+        this.restaurantService.getAvailableTables(reservation.restaurantName, reservation.startTime, 
+          reservation.endTime, reservation.numberOfPeople).subscribe((data: number[]) => {
+            reservation.availableTables = data
+          })
+      })
+
+      this.pendingReservations = this.reservations.filter((reservation: Reservation) => 
+        reservation.confirmedByWaiter === "")
+          
+
+      this.acceptedReservations = this.reservations.filter((reservation: Reservation) => 
+        reservation.confirmedByWaiter == this.user.username)
+    })
   }
 
   page: number = 1
   user: User = new User()
   error: string = ""
 
+  reservations: Reservation[] = []
+  pendingReservations: Reservation[] = []
+  acceptedReservations: Reservation[] = []
+
   navigateTo(newPage: number)
   {
     this.page = newPage
+    localStorage.setItem("page", newPage.toString())
   }
 
   updateInfo()
@@ -71,6 +109,61 @@ export class WaiterComponent {
         alert(data.msg)
         window.location.reload();
     })
+  }
+
+  confirmReservation(reservation: Reservation)
+  {
+    if (reservation.tableId == null)
+    {
+      alert("Please select a table!");
+      return;
+    }
+
+    reservation.confirmedByWaiter = this.user.username
+    this.restaurantService.confirmReservation(reservation).subscribe((data:any) => {
+      alert(data.msg)
+
+      if (data.msg == "Success!")
+      {
+          window.location.reload();
+      }
+    })
+  }
+
+  rejectReservation(reservation: Reservation)
+  {
+    this.restaurantService.rejectReservation(reservation).subscribe((data:any) => {
+      alert(data.msg)
+      window.location.reload();
+    })
+  }
+
+  showedUp(reservation: Reservation, showedUp: number)
+  {
+   if (new Date() < new Date(reservation.endTime.getTime() + 30 * 60000))
+   {
+     alert("You cant confirm guest attendance yet!")
+     return;
+   }
+
+   if (showedUp == 1)
+    reservation.showedUp = 1;
+   else
+    reservation.showedUp = -1;
+
+    this.restaurantService.showedUp(reservation).subscribe((data:any) => {
+      alert(data.msg)
+
+      if (data.msg == "Success!")
+        window.location.reload();
+    })
+
+  }
+
+  extendTime(reservation: Reservation)
+  {
+    // reservation.endTime = new Date(reservation.endTime)
+    // reservation.endTime.setHours(reservation.endTime.getHours() + 1)
   }
 
   logout()

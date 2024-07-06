@@ -166,9 +166,9 @@ export class GuestComponent implements OnInit {
   isCancelButtonDisabled(reservation: Reservation): boolean {
     
     const expirationTime = new Date(reservation.startTime.getTime() + (45 * 60000)); // Adding 45 minutes to the start time
-    console.log((expirationTime < new Date() && reservation.cancelledByUser == false && reservation.cancelledByWaiter == false));
-    return expirationTime < new Date() || reservation.cancelledByUser == true || reservation.cancelledByWaiter == true;
-    //return false;
+    
+    //return expirationTime < new Date() || reservation.cancelledByUser == true || reservation.cancelledByWaiter == true;
+    return expirationTime < new Date() || reservation.cancelledByWaiter == true;
   }
 
   tooCloseToCancel(reservation: Reservation): boolean {
@@ -177,7 +177,8 @@ export class GuestComponent implements OnInit {
   }
 
   alreadyCancelled(reservation: Reservation): boolean {
-    return reservation.cancelledByUser == true || reservation.cancelledByWaiter == true;
+    // return reservation.cancelledByUser == true || reservation.cancelledByWaiter == true;
+    return reservation.cancelledByWaiter == true
   }
 
   findRestaurantAddress(restaurantName: string): string {
@@ -185,6 +186,7 @@ export class GuestComponent implements OnInit {
     return restaurant?.address ?? '';
   }
 
+  /*
   cancelReservation(reservation: Reservation)
   {
     if (this.isCancelButtonDisabled(reservation)) {
@@ -207,7 +209,7 @@ export class GuestComponent implements OnInit {
     }
 
   }
-
+  */
 
   logout()
   {

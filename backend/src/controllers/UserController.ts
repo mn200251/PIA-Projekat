@@ -222,6 +222,5 @@ export class UserController {
         await reservation.save();
 
         return res.json({ msg: 'Success!' });
-
     }
 }
