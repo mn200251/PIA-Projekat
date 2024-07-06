@@ -33,4 +33,16 @@ restaurantRouter
 restaurantRouter
     .route("/showedUp")
     .post((req, res) => new RestaurantController_1.RestaurantController().showedUp(req, res));
+restaurantRouter
+    .route("/addMenuItem")
+    .post((req, res) => new RestaurantController_1.RestaurantController().addMenuItem(req, res));
+restaurantRouter
+    .route("/getOrders")
+    .get((req, res) => new RestaurantController_1.RestaurantController().getOrders(req, res));
+restaurantRouter
+    .route("/addOrder")
+    .post((req, res) => new RestaurantController_1.RestaurantController().addOrder(req, res));
+restaurantRouter
+    .route("/updateDelivery")
+    .post((req, res) => new RestaurantController_1.RestaurantController().updateDelivery(req, res));
 exports.default = restaurantRouter;

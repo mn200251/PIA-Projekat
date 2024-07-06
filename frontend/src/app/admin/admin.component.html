@@ -161,38 +161,56 @@
         </table>
     </div>
 
-    <div class="container">
-        <div *ngIf="page == 4">
-            <h3>Add Restaurant</h3><br>
-        
-            <form class="restaurant-form" (submit)="saveRestaurant()">
-                <label for="name">Name:</label>
-                <input type="text" id="name" [(ngModel)]="name" name="name" required />
-        
-                <label for="type">Type:</label>
-                <input type="text" id="type" [(ngModel)]="type" name="type" required />
-        
-                <label for="address">Address:</label>
-                <input type="text" id="address" [(ngModel)]="address" name="address" required />
-        
-                <label for="description">Description:</label>
-                <textarea id="description" [(ngModel)]="description" name="description" required></textarea>
-        
-                <label for="contactPerson">Contact Person:</label>
-                <input type="text" id="contactPerson" [(ngModel)]="contactPerson" name="contactPerson" required />
-        
-                <label for="layout">Layout:</label>
-                <input type="file" id="layout" (change)="onFileSelected($event)">
-        
-                <label for="workingHours">Working Hours - "Day,StartTime,EndTime;":</label>
-                <textarea id="workingHours" [(ngModel)]="workingHoursText" name="workingHoursText" required></textarea>
-        
-                <p class="error">{{error}}</p>
-        
-                <button type="submit">Save Restaurant</button>
-            </form>
-        </div>
+    <div *ngIf="page == 4">
+        <h3>Add Restaurant</h3><br>
+    
+        <form class="restaurant-form" (submit)="saveRestaurant()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" required />
+    
+            <label for="type">Type:</label>
+            <input type="text" id="type" [(ngModel)]="type" name="type" required />
+    
+            <label for="address">Address:</label>
+            <input type="text" id="address" [(ngModel)]="address" name="address" required />
+    
+            <label for="description">Description:</label>
+            <textarea id="description" [(ngModel)]="description" name="description" required></textarea>
+    
+            <label for="contactPerson">Contact Person:</label>
+            <input type="text" id="contactPerson" [(ngModel)]="contactPerson" name="contactPerson" required />
+    
+            <label for="layout">Layout:</label>
+            <input type="file" id="layout" (change)="onFileSelected($event)">
+    
+            <label for="workingHours">Working Hours - "Day,StartTime,EndTime;":</label>
+            <textarea id="workingHours" [(ngModel)]="workingHoursText" name="workingHoursText" required></textarea>
+    
+            <p class="error">{{error}}</p>
+    
+            <button type="submit">Save Restaurant</button>
+        </form>
+
+        <br>
+
+        <h3>Add Menu Item</h3><br>
+
+        <label for="restaurantName">Restaurant name:</label>
+            <input type="text" [(ngModel)]="restaurantName" name="restaurantName" required />
+            <label for="menuItem.name">Name:</label>
+            <input type="text" [(ngModel)]="menuItem.name" name="menuItem.name" required />
+            <label for="menuItem.price">Price:</label>
+            <input type="text" [(ngModel)]="menuItem.price" name="menuItem.price" required />
+            <label for="menuItem.imageLink">Menu item image:</label>
+            <input type="text" [(ngModel)]="menuItem.imageLink" name="menuItem.imageLink" />
+            <label for="menuItem.imageLink">Ingredients:</label>
+            <input type="text" [(ngModel)]="menuItem.ingredients" name="menuItem.ingredients" required />
+
+            <button (click)="addMenuItem()">Add Menu Item</button>
+
     </div>
+        
+
 
     <div id="registerForm" *ngIf="page == 5">
         <h4>Add Waiter</h4>

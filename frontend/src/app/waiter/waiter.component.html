@@ -144,5 +144,51 @@
 
         </table>
     </div>
-  </div>
+
+    <div *ngIf="page == 3">
+      <h3>Deliveries</h3>
+
+      <div *ngIf="orders.length == 0">
+        <p>No deliveries</p>
+      </div>
+      <div *ngIf="orders.length > 0">
+        <table>
+          <tr>
+            <th>User</th>
+            <th>Order Time</th>
+            <th>Items</th>
+            <th>Price</th>
+            <th>Delivery Time</th>
+            <th>Cancel Delivery</th>
+          </tr>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.username }}</td>
+            <td>
+              <p>{{order.orderTime.getDate()}}.{{order.orderTime.getMonth() + 1}} {{order.orderTime.getHours()}}:{{order.orderTime.getMinutes().toString().padStart(2, '0')}}
+              </p>
+            </td>
+            <td>
+              <div *ngFor="let item of order.items">
+                <p>{{ item.name }} x {{ item.quantity }}</p>
+              </div>
+            </td>
+            <td>{{ order.totalPrice }}</td>
+            <td>
+              <select [(ngModel)]="order.estimatedTime" name="order.estimatedTime">
+                <option value="20-30 minutes">20-30 minutes</option>
+                <option value="30-40 minutes">30-40 minutes</option>
+                <option value="50-60 minutes">50-60 minutes</option>
+              </select>
+              <button (click)="setDeliveryTime(order)">Set Delivery Time</button>
+            </td>
+            <td>
+              <button (click)="cancelDelivery(order)">Cancel Delivery</button>
+            </td>
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+</div>
 

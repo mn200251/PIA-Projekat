@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { Reservation } from '../models/Reservation';
 import { RestaurantService } from '../services/restaurant.service';
 import { Restaurant } from '../models/Restaurant';
+import { Order } from '../models/Order';
 
 @Component({
   selector: 'app-waiter',
@@ -75,6 +76,18 @@ export class WaiterComponent {
       this.acceptedReservations = this.reservations.filter((reservation: Reservation) => 
         reservation.confirmedByWaiter == this.user.username)
     })
+
+    this.restaurantService.getOrders().subscribe(data => {
+      this.orders = data.filter((order: Order) => order.restaurantName === this.user.worksAt)
+      .filter((order: Order) => order.status === "Pending").sort((a: Order, b: Order) => {
+        return a.orderTime < b.orderTime ? -1 : 1;
+      })
+
+      this.orders.forEach((order: Order) => {
+        order.orderTime = new Date(order.orderTime)
+      })
+    })
+
   }
 
   page: number = 1
@@ -84,11 +97,13 @@ export class WaiterComponent {
   reservations: Reservation[] = []
   pendingReservations: Reservation[] = []
   acceptedReservations: Reservation[] = []
+  orders: Order[] = []
 
   navigateTo(newPage: number)
   {
     this.page = newPage
     localStorage.setItem("page", newPage.toString())
+    window.location.reload()
   }
 
   updateInfo()
@@ -164,6 +179,32 @@ export class WaiterComponent {
   {
     // reservation.endTime = new Date(reservation.endTime)
     // reservation.endTime.setHours(reservation.endTime.getHours() + 1)
+  }
+
+  setDeliveryTime(order: Order)
+  {
+    if (order.estimatedTime == "")
+    {
+      alert("Please enter estimated delivery time!")
+      return;
+    }
+    order.status = "Active"
+
+    this.restaurantService.updateDelivery(order).subscribe((data:any) => {
+      alert(data.msg)
+      window.location.reload();
+    })
+  }
+
+  cancelDelivery(order: Order)
+  {
+    order.status = "Cancelled"
+    order.estimatedTime = ""
+
+    this.restaurantService.updateDelivery(order).subscribe((data:any) => {
+      alert(data.msg)
+      window.location.reload();
+    })
   }
 
   logout()

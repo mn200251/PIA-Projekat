@@ -40,6 +40,7 @@ const express = __importStar(require("express"));
 const Restaurant_1 = __importDefault(require("../models/Restaurant"));
 const User_1 = __importDefault(require("../models/User"));
 const Reservation_1 = __importDefault(require("../models/Reservation"));
+const Order_1 = __importDefault(require("../models/Order"));
 const router = express.Router();
 class RestaurantController {
     constructor() {
@@ -258,6 +259,55 @@ class RestaurantController {
             }
             reservation.showedUp = req.body.showedUp;
             yield reservation.save();
+            return res.json({ msg: 'Success!' });
+        });
+        this.addMenuItem = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const restaurantName = req.body.restaurantName;
+            const menuItem = req.body.menuItem;
+            const restaurant = yield Restaurant_1.default.findOne({ name: restaurantName });
+            if (!restaurant) {
+                return res.json({ msg: 'Restaurant not found!' });
+            }
+            restaurant.menu.push(menuItem);
+            yield restaurant.save();
+            return res.json({ msg: 'Success!' });
+        });
+        this.getOrders = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const orders = yield Order_1.default.find();
+            return res.json(orders);
+        });
+        this.addOrder = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.body.username;
+            let restaurantName = req.body.restaurantName;
+            let status = req.body.status;
+            let items = req.body.items;
+            let totalPrice = req.body.totalPrice;
+            let orderTime = req.body.orderTime;
+            const lastOrder = yield Order_1.default.findOne().sort({ _id: -1 }).limit(1);
+            const newOrderId = lastOrder ? lastOrder.id + 1 : 1;
+            const newOrder = new Order_1.default({ id: newOrderId,
+                username,
+                restaurantName,
+                status,
+                items,
+                estimatedTime: "",
+                totalPrice,
+                orderTime
+            });
+            yield newOrder.save();
+            return res.json({ msg: 'Success!' });
+        });
+        this.updateDelivery = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const id = req.body.id;
+            const estimatedTime = req.body.estimatedTime;
+            const status = req.body.status;
+            const order = yield Order_1.default.findOne({ id: id });
+            if (!order) {
+                return res.json({ msg: 'Order not found!' });
+            }
+            order.estimatedTime = estimatedTime;
+            order.status = status;
+            yield order.save();
             return res.json({ msg: 'Success!' });
         });
     }

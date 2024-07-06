@@ -2,6 +2,7 @@ import * as express from "express";
 import Restaurant from "../models/Restaurant";
 import User from "../models/User";
 import Reservation from "../models/Reservation";
+import Order from "../models/Order";
 const router = express.Router();
 
 
@@ -280,4 +281,71 @@ export class RestaurantController {
         await reservation.save();
         return res.json({ msg: 'Success!' });
     }
+
+    addMenuItem = async (req: express.Request, res: express.Response) => {
+        const restaurantName = req.body.restaurantName;
+        const menuItem = req.body.menuItem;
+
+        const restaurant = await Restaurant.findOne({ name: restaurantName });
+        if (!restaurant) {
+            return res.json({ msg: 'Restaurant not found!' });
+        }
+
+        restaurant.menu.push(menuItem);
+        await restaurant.save();
+        return res.json({ msg: 'Success!' });
+    }
+
+    getOrders = async (req: express.Request, res: express.Response) => {
+
+        const orders = await Order.find();
+
+        return res.json(orders);
+    }
+
+    addOrder = async (req: express.Request, res: express.Response) => {
+    
+        let username =  req.body.username;
+        let restaurantName = req.body.restaurantName;
+        let status =  req.body.status;
+        let items = req.body.items;
+        let totalPrice = req.body.totalPrice;
+        let orderTime =  req.body.orderTime;
+        
+        const lastOrder = await Order.findOne().sort({ _id: -1 }).limit(1);
+        const newOrderId = lastOrder ? lastOrder.id + 1 : 1;
+    
+        const newOrder = new Order(
+            {   id: newOrderId, 
+                username, 
+                restaurantName,
+                status, 
+                items,
+                estimatedTime: "",
+                totalPrice, 
+                orderTime
+            });
+
+        await newOrder.save();
+        return res.json({ msg: 'Success!' });
+    }
+
+    updateDelivery = async (req: express.Request, res: express.Response) => {
+        const id = req.body.id;
+        const estimatedTime = req.body.estimatedTime;
+        const status = req.body.status;
+
+        const order = await Order.findOne({ id: id });
+
+        if (!order) {
+            return res.json({ msg: 'Order not found!' });
+        }
+
+        order.estimatedTime = estimatedTime;
+        order.status = status;
+        
+        await order.save();
+        return res.json({ msg: 'Success!' });
+    }
 }
+

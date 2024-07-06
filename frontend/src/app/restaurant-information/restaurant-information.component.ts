@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
-import { Restaurant, Table, WorkingHours } from '../models/Restaurant';
+import { MenuItem, Restaurant, Table, WorkingHours } from '../models/Restaurant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RestaurantService } from '../services/restaurant.service';
+import { Order, OrderItem } from '../models/Order';
 
 @Component({
   selector: 'app-restaurant-information',
@@ -61,6 +62,7 @@ export class RestaurantInformationComponent implements OnInit {
 
   user: User = new User()
   restaurant: any = null
+  order: Order  = new Order()
 
   reservationForm: FormGroup = this.fb.group({
     date: ['', Validators.required],
@@ -154,6 +156,48 @@ export class RestaurantInformationComponent implements OnInit {
     return hours * 60 + minutes;
   }
 
+  addToCart(menuItem: MenuItem)
+  {
+    if (menuItem.helperQuantity < 1)
+    {
+      alert("Quantity must be at least 1!")
+      return
+    }
+
+    let item = new OrderItem()
+    item.name = menuItem.name
+    item.price = menuItem.price
+    item.quantity = menuItem.helperQuantity
+
+    this.order.items.push(item)
+    this.order.totalPrice += item.price * item.quantity
+
+    alert("Item added to cart!")
+  }
+
+  finishOrder()
+  {
+    if (this.order.items.length < 1)
+    {
+      alert("Cart is empty!")
+      return
+    }
+
+    this.order.username = this.user.username
+    this.order.restaurantName = this.restaurant.name
+    this.order.status = "Pending"
+    this.order.orderTime = new Date()
+
+    this.resturantService.addOrder(this.order).subscribe((data:any) => {
+
+      alert(data.msg)
+      if(data.msg == "Success!")
+      {
+          window.location.reload()
+      }
+
+    })
+  }
 
   navigateTo(newPage: number)
   {

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
-import { Kitchen, Layout, Restaurant, Table, Toilet, WorkingHours } from '../models/Restaurant';
+import { Kitchen, Layout, MenuItem, Restaurant, Table, Toilet, WorkingHours } from '../models/Restaurant';
 import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
@@ -132,6 +132,8 @@ export class AdminComponent implements OnInit{
   newWaiter: User = new User()
 
   restaurants: Restaurant[] = []
+  menuItem: MenuItem = new MenuItem()
+  restaurantName: string = ""
 
   DaysOfWeek: string[] = [
     'Monday',
@@ -249,7 +251,8 @@ export class AdminComponent implements OnInit{
       this.description,
       this.contactPerson,
       layout,
-      this.workingHours
+      this.workingHours,
+      []
     );
 
     if(!this.addWorkingHours())
@@ -410,6 +413,16 @@ export class AdminComponent implements OnInit{
         }
       }
     });
+  }
+
+  addMenuItem()
+  {
+    this.restaurantService.addMenuItem(this.restaurantName, this.menuItem).subscribe((data:any) => {
+      alert(data.msg)
+
+      if(data.msg == "Success!")
+        window.location.reload()
+    })
   }
 
   addWaiter()

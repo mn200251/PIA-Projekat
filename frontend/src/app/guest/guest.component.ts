@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { Restaurant } from '../models/Restaurant';
 import { RestaurantService } from '../services/restaurant.service';
 import { Reservation } from '../models/Reservation';
+import { Order } from '../models/Order';
 
 @Component({
   selector: 'app-guest',
@@ -49,6 +50,17 @@ export class GuestComponent implements OnInit {
       this.restaurants = data
     })
 
+
+    this.restaurantService.getOrders().subscribe(data => {
+      this.activeOrders = data.filter(elem => {
+        if (elem.username == this.user.username && elem.status == "Active")
+          return true
+        return false
+      }).sort((a, b) => {
+        return new Date(a.orderTime) < new Date(b.orderTime) ? 1 : -1
+      })
+
+    })
     
 
     this.userService.getUsers().subscribe(data => {
@@ -107,10 +119,13 @@ export class GuestComponent implements OnInit {
   expiredReservations: Reservation[] = []
   activeReservations: Reservation[] = []
 
+  activeOrders: Order[] = []
+
   navigateTo(newPage: number)
   {
     this.page = newPage
     localStorage.setItem("page", newPage.toString())
+    window.location.reload()
   }
 
   updateInfo()

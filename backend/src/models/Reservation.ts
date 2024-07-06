@@ -13,8 +13,16 @@ export const ReservationSchema: Schema = new Schema({
     endTime: { type: Date, required: true },
     numberOfPeople: { type: Number, required: true },
     additionalRequests: { type: String, required: false },
-    showedUp: { type: Number, default: 0 }
-
+    showedUp: { type: Number, default: 0 },
+    menu: [
+        {
+            name: { type: String, required: true },
+            price: { type: Number, required: true },
+            imageLink: { type: Number },
+            ingredients: { type: String, required: true }
+        }
+    ],
+    
 });
 
 export default mongoose.model("Reservation", ReservationSchema, "Reservations");

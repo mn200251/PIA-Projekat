@@ -33,6 +33,15 @@ export interface Table {
     open: string;
     close: string;
   }
+
+  export class MenuItem {
+    name: string = "";
+    price: number = 0;
+    imageLink: string = "";
+    ingredients: string = "";
+
+    helperQuantity: number = 1;
+  }
   
   export class Restaurant {
     constructor(
@@ -43,6 +52,7 @@ export interface Table {
       public contactPerson: string,
       public layout: Layout,
       public workingHours: WorkingHours[],
+      public menu: MenuItem[]
     ) {}
   }
   

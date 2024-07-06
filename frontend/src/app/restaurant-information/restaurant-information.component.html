@@ -61,6 +61,7 @@
 
     <div>
         <h2>Make a Reservation</h2>
+        <br>
         <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
           <div>
             <label for="date">Date:</label>
@@ -81,6 +82,62 @@
           <button type="submit">Reserve</button>
         </form>
         <p>{{ feedbackMessage }}</p>
-      </div>
+
+        <h2>Make an order</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ingredients</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let menuItem of restaurant.menu">
+                    <td>{{ menuItem.name }}</td>
+                    <td>{{ menuItem.ingredients }}</td>
+                    <td>{{ menuItem.price }}</td>
+                    <td><input type="number" [(ngModel)]="menuItem.helperQuantity" name= "menuItem.helperQuantity"/></td>
+                    <td><button (click)="addToCart(menuItem)">Add to cart</button></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <br>
+        <h3>Cart</h3>
+
+        <div *ngIf="order.items.length === 0">
+            <p>Your cart is empty</p>
+        </div>
+
+        <div *ngIf="order.items.length != 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tr *ngFor="let orderItem of order.items">
+              <td>{{ orderItem.name }}</td>
+              <td>{{ orderItem.price }}</td>
+              <td>{{ orderItem.quantity }}</td>
+            </tr>
+            <tr>
+              <td>Total: {{ order.totalPrice }}$
+            </tr>
+          </table>
+          
+          <button (click)="finishOrder()">Finish order</button>
+
+        </div>   
+    </div>
 
 </div>

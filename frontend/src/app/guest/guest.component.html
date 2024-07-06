@@ -155,7 +155,7 @@
 
     <br>
 
-    <h3>Expired Reservations</h3><br>
+      <h3>Expired Reservations</h3><br>
       
       <div *ngIf="expiredReservations.length == 0">
         <p>No expired reservations</p>
@@ -189,5 +189,34 @@
         </table>
       </div>
     </div>
+
+    <div *ngIf="page == 4">
+      <h3>Active Deliveries</h3><br>
+
+      <div *ngIf="activeOrders.length != 0">
+        <table>
+          <tr>
+            <th>Restaurant</th>
+            <th>Status</th>
+            <th>Delivery Time</th>
+          </tr>
+          <tr *ngFor="let delivery of activeOrders">
+            <td>
+              <p>{{ delivery.restaurantName }}</p>
+            </td>
+            <td>
+              <p>{{ delivery.status }}</p>
+            </td>
+            <td>
+              <p>{{ delivery.estimatedTime }}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="activeOrders.length == 0">
+        <p>No active deliveries</p>
+      </div>
+    </div>
+
 </div>
 

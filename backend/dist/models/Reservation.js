@@ -30,12 +30,20 @@ exports.ReservationSchema = new mongoose_1.Schema({
     restaurantName: { type: String, required: true },
     tableId: { type: Number, default: null },
     confirmedByWaiter: { type: String, required: false },
-    cancelledByUser: { type: Boolean, default: false },
+    // cancelledByUser: { type: Boolean, default: false},
     cancelledByWaiter: { type: Boolean, default: false },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
     numberOfPeople: { type: Number, required: true },
     additionalRequests: { type: String, required: false },
-    showedUp: { type: Number, default: 0 }
+    showedUp: { type: Number, default: 0 },
+    menu: [
+        {
+            name: { type: String, required: true },
+            price: { type: Number, required: true },
+            imageLink: { type: Number },
+            ingredients: { type: String, required: true }
+        }
+    ],
 });
 exports.default = mongoose_1.default.model("Reservation", exports.ReservationSchema, "Reservations");

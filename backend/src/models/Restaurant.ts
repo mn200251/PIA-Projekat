@@ -50,7 +50,15 @@ const restaurantSchema = new Schema({
   description: { type: String, required: true },
   contactPerson: { type: String, required: true },
   layout: layoutSchema,
-  workingHours: [workingHoursSchema]
+  workingHours: [workingHoursSchema],
+  menu: [
+    {
+      name: { type: String, required: true },
+      price: { type: Number, required: true },
+      imageLink: { type: String },
+      ingredients: { type: String, required: true }
+    }
+  ]
 });
 
 export default mongoose.model("Restaurant", restaurantSchema, "Restaurants");
