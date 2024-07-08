@@ -79,7 +79,7 @@ export class AdminComponent implements OnInit{
     }
 
     this.userService.updateInfo(user.username, user.forename, user.surname, user.address, user.email, 
-      user.contactPhone, user.creditCardNumber).subscribe((data:any) => {
+      user.contactPhone, user.profilePicture, user.creditCardNumber).subscribe((data:any) => {
         alert(data.msg)
         window.location.reload();
     })
@@ -171,11 +171,14 @@ export class AdminComponent implements OnInit{
     const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
     let status = true
+    console.log(this.workingHoursText)
     try
     {
       let trimmedWorkingHoursText = this.workingHoursText.trim().slice(0, -1) // remove last ;
       let workingHourLines = trimmedWorkingHoursText.split(";")
 
+      
+      console.log(this.workingHoursText)
       workingHourLines.forEach(workingHour => {
         let line = workingHour.trim().split(",")
         let day = line[0].trim()
@@ -191,6 +194,7 @@ export class AdminComponent implements OnInit{
         }
 
         // Test the time string against the regex
+
         if (!timeRegex.test(open) || !timeRegex.test(close)) {
           this.error = "Incorrect format for working hours!"
           this.resetLayout()
@@ -203,6 +207,7 @@ export class AdminComponent implements OnInit{
     }
     catch(e)
     {
+      console.log(e)
       this.error = "Incorrect format for working hours!"
       this.resetLayout()
       return false
@@ -232,9 +237,6 @@ export class AdminComponent implements OnInit{
       toilets: this.toilets
     };
 
-    console.log(this.tables.length)
-    console.log(layout.tables.length)
-
     if (this.kitchens.length < 1 || this.toilets.length < 1 || this.tables.length < 3)
     {
       this.error = "At least 3 tables, 1 toilet and 1 kitchen must be in restaurant!"
@@ -242,7 +244,8 @@ export class AdminComponent implements OnInit{
       return
     }
 
-    this.checkLayout()
+    if (!this.checkLayout())
+      return
  
     const newRestaurant = new Restaurant(
       this.name,
@@ -274,7 +277,18 @@ export class AdminComponent implements OnInit{
       this.layoutFile = files[0];
     }
   }
+
+  async setPicture(event: any) {
+    if (event.target.files[0])
+    {
+        this.temp = event.target.files[0];
+        const formData = new FormData();
+        formData.append('profilePicture', this.temp, this.temp.name);
+        this.menuItem.imageLink = await this.userService.uploadPicture(formData).toPromise();
+    }
+  }
   
+  temp: any = null
 
   loadLayoutFromJson(file: File): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -337,7 +351,7 @@ export class AdminComponent implements OnInit{
   }
   
 
-  checkLayout() {
+  checkLayout() : boolean{
     this.error = "";
   
     this.tables.forEach(table => {
@@ -413,6 +427,11 @@ export class AdminComponent implements OnInit{
         }
       }
     });
+
+    if (this.error != "")
+      return false
+    else
+      return true
   }
 
   addMenuItem()

@@ -39,9 +39,9 @@ let User = new Schema({
     securityAnswer: {
         type: String,
     },
-    // profilePicure: {
-    //   type: any,
-    // },
+    profilePicture: {
+        type: String,
+    },
     creditCardNumber: {
         type: Number,
     },

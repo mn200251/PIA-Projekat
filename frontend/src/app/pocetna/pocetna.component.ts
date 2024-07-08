@@ -85,10 +85,10 @@ export class PocetnaComponent implements OnInit {
     this.securityAnswer = ""
     this.sex = ""
     this.address = ""
-    this.contactPhone = null
+    this.contactPhone = 0
     this.email = ""
-    this.profilePicure = null
-    this.creditCardNumber = null
+    this.profilePicture = null
+    this.creditCardNumber = 0
 
     this.oldPassword = ""
     this.newPassword = ""
@@ -168,11 +168,13 @@ export class PocetnaComponent implements OnInit {
   securityAnswer = ""
   sex = ""
   address = ""
-  contactPhone: number | null = null
+  contactPhone: number = 0
   email = ""
-  profilePicure: any | null = null
-  creditCardNumber: number | null = null
+  profilePicture: any | null = null
+  creditCardNumber: number = 0
   sortCriteria = "name"
+
+  temp: any = {}
 
 
   validatePassword(pw: string): boolean {
@@ -252,49 +254,13 @@ export class PocetnaComponent implements OnInit {
       return;
     }
 
-    // check if password is correct format
-    //const passwordPattern = /^(?=[A-Za-z])(?=.*[A-Z])(?=(?:.*[a-z]){3,})(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,10}$/;
-    //const passwordPattern = /^[A-Za-z](?=.*[A-Z])(?=.*[a-z]{3,})(?=.*\d)(?=.*[\W_]).{5,9}$/;
-
-    //if (passwordPattern.test(this.password)) {
-    //  this.error = "Password must be 6-10 characters long, start with a letter, contain at least 1 capital letter, at least 3 small letters, 1 number, and 1 special character.";
-    //  return;
-    //}
     if (!this.validatePassword(this.password))
     {
       return;
     }
 
-    // check if picture is correct format
-    if (this.profilePicure && this.profilePicure.files.length > 0) {
-      const file = this.profilePicure.files[0];
-      const validImageTypes = ['image/jpeg', 'image/png'];
-      if (!validImageTypes.includes(file.type)) {
-        this.error = "Profile picture must be in JPG or PNG format.";
-        return;
-      }
-      const img = new Image();
-      img.onload = () => {
-        if (img.width < 100 || img.height < 100 || img.width > 300 || img.height > 300) {
-          this.error = "Profile picture dimensions must be between 100x100px and 300x300px.";
-          return;
-        } else {
-          this.error = ""; // Clear error if all checks pass
-          // this.completeRegistration();
-        }
-      };
-    
-
-      // ???
-      const reader = new FileReader();
-        reader.onload = (e: any) => {
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      } 
-      // no picture provided
-      else {
-        this.userService.register(this.username,
+      this.userService.register(
+          this.username,
           this.password,
           this.forename,
           this.surname,
@@ -305,22 +271,30 @@ export class PocetnaComponent implements OnInit {
           this.contactPhone,
           this.securityQuestion,
           this.securityAnswer,
-          // this.profilePicure,
+          this.profilePicture,
           this.creditCardNumber)
-          .subscribe((data:any) => {
-            alert(data.msg)
-            if (data.msg == "Success!")
-            {
-              this.clear()
-              this.navigateTo(1)
-            }
+        .subscribe((data:any) => {
+          alert(data.msg)
+          if (data.msg == "Success!")
+          {
+            this.clear()
+            this.navigateTo(1)
+          }
 
         })
-      }
-
-
+    //}
 
   }
+
+  async setPicture(event: any) {
+    if (event.target.files[0])
+    {
+        this.temp = event.target.files[0];
+        const formData = new FormData();
+        formData.append('profilePicture', this.temp, this.temp.name);
+        this.profilePicture = await this.userService.uploadPicture(formData).toPromise();
+    }
+  }
 
   resetPasswordKnow()
   {
@@ -344,6 +318,8 @@ export class PocetnaComponent implements OnInit {
       return;
     }
     */
+    if (!this.validatePassword(this.newPassword))
+      return;
 
     this.userService.resetPasswordKnow(this.username, this.oldPassword, this.newPassword).subscribe((data:any) => {
       alert(data.msg)
@@ -410,6 +386,9 @@ export class PocetnaComponent implements OnInit {
         this.error = "New password must be the same in both fields!";
         return;
       }
+
+      if (!this.validatePassword(this.newPassword))
+        return;
 
       this.userService.resetPasswordDontKnow(this.username, this.newPassword).subscribe((data:any) => {
         alert(data.msg)

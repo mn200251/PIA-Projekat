@@ -90,6 +90,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Picture</th>
                     <th>Ingredients</th>
                     <th>Price</th>
                     <th>Quantity</th>
@@ -100,6 +101,7 @@
 
               <tr *ngFor="let menuItem of restaurant.menu">
                     <td>{{ menuItem.name }}</td>
+                    <td><img [src]="menuItem.imageLink" alt="No picture" width="100" height="100"></td>
                     <td>{{ menuItem.ingredients }}</td>
                     <td>{{ menuItem.price }}</td>
                     <td><input type="number" [(ngModel)]="menuItem.helperQuantity" name= "menuItem.helperQuantity"/></td>

@@ -39,18 +39,37 @@ exports.UserController = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const Reservation_1 = __importDefault(require("../models/Reservation"));
 const crypto = __importStar(require("crypto"));
+// const fileUpload = require('express-fileupload');
+const fs = require('fs');
+const path = require('path');
 class UserController {
     constructor() {
-        this.login = (req, res) => {
+        this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
             let username = req.body.username;
             let password = req.body.password;
             const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
-            User_1.default.findOne({ username: username, password: hashedPassword })
-                .then((user) => {
-                res.json(user);
-            })
-                .catch((err) => console.log(err));
-        };
+            const user = yield User_1.default.findOne({ username: username, password: hashedPassword });
+            if (!user) {
+                // return res.json({ msg: 'Incorrect username or password!' });
+                return;
+            }
+            // const profilePicture = await fs.readFileSync(user.profilePicture, 'base64')
+            // user.profilePicture = profilePicture;
+            return res.json(user);
+        });
+        this.uploadPicture = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const profFile = req.files;
+            if (typeof profFile === "object" &&
+                profFile !== null &&
+                "profilePicture" in profFile) {
+                const picFileName = profFile.profilePicture[0].filename;
+                const profilePicPath = "http://localhost:4000/images/" + picFileName;
+                res.json(profilePicPath);
+            }
+            else {
+                console.log(profFile);
+            }
+        });
         this.register = (req, res) => __awaiter(this, void 0, void 0, function* () {
             let username = req.body.username;
             let password = req.body.password;
@@ -63,12 +82,31 @@ class UserController {
             let contactPhone = req.body.contactPhone;
             let securityQuestion = req.body.securityQuestion;
             let securityAnswer = req.body.securityAnswer;
-            // let profilePicure = req.body.profilePicure
+            let profilePicture = req.body.profilePicture; //////////////////////////////
             let creditCardNumber = req.body.creditCardNumber;
             let accountStatus = 0;
             const existingUser = yield User_1.default.findOne({ $or: [{ username: username }, { email: email }] });
             if (existingUser)
                 return res.json({ msg: 'User already exists!' });
+            // add image or set default image
+            if (profilePicture == "" || profilePicture == null || profilePicture == undefined) {
+                profilePicture = "http://localhost:4000/images/default.jpg";
+            }
+            else {
+                // console.log("alo");
+                // const profilePicturesDir = path.join('src', 'images', 'profilePictures', username);
+                // if (!fs.existsSync(profilePicturesDir)) {
+                //     fs.mkdirSync(profilePicturesDir);
+                // }
+                // const profilePicurePath = path.join('src', 'images', 'profilePictures', username, username + '.jpg');
+                /*
+                const base64Data = profilePicture.replace(/^data:image\/\w+;base64,/, '');
+                const bufferData = Buffer.from(base64Data, 'base64');
+                fs.writeFileSync(profilePicurePath, bufferData);
+                */
+                // profilePicture = profilePicurePath;
+                console.log(profilePicture);
+            }
             // Encrypt the password
             const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
             const newUser = new User_1.default({
@@ -83,6 +121,7 @@ class UserController {
                 contactPhone,
                 securityQuestion,
                 securityAnswer,
+                profilePicture,
                 creditCardNumber,
                 accountStatus,
             });
@@ -91,7 +130,7 @@ class UserController {
         });
         this.updateInfo = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { username, forename, surname, address, email, contactPhone, creditCardNumber } = req.body;
+                const { username, forename, surname, address, email, contactPhone, profilePicture, creditCardNumber } = req.body;
                 const user = yield User_1.default.findOne({ username });
                 if (!user) {
                     return res.json({ msg: 'User not found' });
@@ -110,6 +149,7 @@ class UserController {
                 user.email = email;
                 user.contactPhone = contactPhone;
                 user.creditCardNumber = creditCardNumber;
+                user.profilePicture = profilePicture;
                 // Save the updated user information
                 yield user.save();
                 res.json({ msg: 'User information updated successfully!' });
@@ -134,7 +174,7 @@ class UserController {
             if (newStatusValue == -2)
                 return res.json({ msg: 'User banned successfully!' });
             else if (newStatusValue == 1)
-                return res.json({ msg: 'User unbanned successfully!' });
+                return res.json({ msg: 'User is now active!' });
             else if (newStatusValue == -1)
                 return res.json({ msg: 'User rejected successfully!' });
         });

@@ -120,6 +120,7 @@ export class GuestComponent implements OnInit {
   activeReservations: Reservation[] = []
 
   activeOrders: Order[] = []
+  temp: any = {}
 
   navigateTo(newPage: number)
   {
@@ -127,6 +128,21 @@ export class GuestComponent implements OnInit {
     localStorage.setItem("page", newPage.toString())
     window.location.reload()
   }
+
+  async setPicture(event: any) {
+    if (event.target.files[0])
+    {
+        this.temp = event.target.files[0];
+        const formData = new FormData();
+        formData.append('profilePicture', this.temp, this.temp.name);
+
+        if (this.user && this.user.profilePicture != null && this.user.profilePicture != "" && this.user.profilePicture != "default.jpg")
+          {
+            this.user.profilePicture = await this.userService.uploadPicture(formData).toPromise();
+          }
+
+    }
+  }
 
   updateInfo()
   {
@@ -137,7 +153,7 @@ export class GuestComponent implements OnInit {
     }
 
     this.userService.updateInfo(this.user.username, this.user.forename, this.user.surname, this.user.address, this.user.email, 
-      this.user.contactPhone, this.user.creditCardNumber).subscribe((data:any) => {
+      this.user.contactPhone, this.user.profilePicture, this.user.creditCardNumber).subscribe((data:any) => {
         if (data.msg === "User information updated successfully!")
         {
           localStorage.setItem("user", JSON.stringify(this.user))

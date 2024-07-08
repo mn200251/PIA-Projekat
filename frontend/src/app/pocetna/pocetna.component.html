@@ -1,28 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="navigateTo(0)">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="navigateTo(1)">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="navigateTo(2)">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="navigateTo(3)">Reset password</a>
-          </li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kutak dobre hrane</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="navigateTo(0)">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="navigateTo(1)">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="navigateTo(2)">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="navigateTo(3)">Reset password</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
   <div class="container">
   
@@ -32,20 +45,20 @@
       Number of registered guests: {{this.numGuests}}<br>
       Number of restaurants: {{this.numRestaurants}}<br><br>
 
-      <div>
-        <label>
-          Name:
-          <input type="text" [(ngModel)]="searchName" />
-        </label>
-        <label>
-          Address:
-          <input type="text" [(ngModel)]="searchAddress" />
-        </label>
-        <label>
-          Type:
-          <input type="text" [(ngModel)]="searchType" />
-        </label>
-      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="searchName">Name:</label>
+            <input type="text" class="form-control" id="searchName" [(ngModel)]="searchName" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="searchAddress">Address:</label>
+            <input type="text" class="form-control" id="searchAddress" [(ngModel)]="searchAddress" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="searchType">Type:</label>
+            <input type="text" class="form-control" id="searchType" [(ngModel)]="searchType" />
+        </div>
+    </div>
     
       <table>
         <thead>
@@ -103,7 +116,7 @@
       <input type="text" name="address" placeholder="Address" [(ngModel)]="address">
       <input type="tel" name="contactPhone" placeholder="Phone" [(ngModel)]="contactPhone">
       <input type="email" name="email" placeholder="Email" [(ngModel)]="email">
-      <input type="file" name="profilePicure" [(ngModel)]="profilePicure">
+      <input type="file" (change)="setPicture($event)">
       <input type="number" name="creditCardNumber" placeholder="Credit Card Number" [(ngModel)]="creditCardNumber">
   
       <p class="error">{{error}}</p>

@@ -10,7 +10,7 @@ export class User{
     contactPhone: number | null = null
     securityQuestion: string = ""
     securityAnswer: string = ""
-    profilePicure: any | null = null
+    profilePicture: any = null
     creditCardNumber: number = 0
 
     worksAt: string = ""

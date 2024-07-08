@@ -37,7 +37,7 @@ export interface Table {
   export class MenuItem {
     name: string = "";
     price: number = 0;
-    imageLink: string = "";
+    imageLink: any = null;
     ingredients: string = "";
 
     helperQuantity: number = 1;

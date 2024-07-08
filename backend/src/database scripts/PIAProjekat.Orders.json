@@ -1,0 +1,157 @@
+[{
+  "_id": {
+    "$oid": "668a3673f9a3d9dc69124e50"
+  },
+  "id": 1,
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "status": "Active",
+  "estimatedTime": "30-40 minutes",
+  "items": [
+    {
+      "name": "Gyros XXL",
+      "price": 7,
+      "quantity": 1,
+      "_id": {
+        "$oid": "668a3673f9a3d9dc69124e51"
+      }
+    },
+    {
+      "name": "Pepsi MAX",
+      "price": 2,
+      "quantity": 2,
+      "_id": {
+        "$oid": "668a3673f9a3d9dc69124e52"
+      }
+    }
+  ],
+  "totalPrice": 11,
+  "orderTime": {
+    "$date": "2024-07-07T06:32:19.813Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a3692f9a3d9dc69124e8c"
+  },
+  "id": 2,
+  "username": "nikola",
+  "restaurantName": "Poncho",
+  "status": "Pending",
+  "estimatedTime": "",
+  "items": [
+    {
+      "name": "Pljeskavica",
+      "price": 5,
+      "quantity": 3,
+      "_id": {
+        "$oid": "668a3692f9a3d9dc69124e8d"
+      }
+    },
+    {
+      "name": "Sendvic",
+      "price": 4,
+      "quantity": 1,
+      "_id": {
+        "$oid": "668a3692f9a3d9dc69124e8e"
+      }
+    },
+    {
+      "name": "Cevapi",
+      "price": 7,
+      "quantity": 1,
+      "_id": {
+        "$oid": "668a3692f9a3d9dc69124e8f"
+      }
+    }
+  ],
+  "totalPrice": 26,
+  "orderTime": {
+    "$date": "2024-07-07T06:32:50.703Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a36a1f9a3d9dc69124ecd"
+  },
+  "id": 3,
+  "username": "nikola",
+  "restaurantName": "Milky",
+  "status": "Pending",
+  "estimatedTime": "",
+  "items": [
+    {
+      "name": "Palacinka sa eurokremom",
+      "price": 12,
+      "quantity": 2,
+      "_id": {
+        "$oid": "668a36a1f9a3d9dc69124ece"
+      }
+    }
+  ],
+  "totalPrice": 24,
+  "orderTime": {
+    "$date": "2024-07-07T06:33:05.501Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a3d5991ea867bb3bb93e4"
+  },
+  "id": 4,
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "status": "Pending",
+  "estimatedTime": "",
+  "items": [
+    {
+      "name": "Rich Bitch",
+      "price": 10,
+      "quantity": 3,
+      "_id": {
+        "$oid": "668a3d5991ea867bb3bb93e5"
+      }
+    }
+  ],
+  "totalPrice": 30,
+  "orderTime": {
+    "$date": "2024-07-07T07:01:45.360Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a3e5491ea867bb3bb9850"
+  },
+  "id": 5,
+  "username": "user2",
+  "restaurantName": "Richard Gyros",
+  "status": "Pending",
+  "estimatedTime": "",
+  "items": [
+    {
+      "name": "Gyros XXL",
+      "price": 7,
+      "quantity": 2,
+      "_id": {
+        "$oid": "668a3e5491ea867bb3bb9851"
+      }
+    },
+    {
+      "name": "Pepsi MAX",
+      "price": 2,
+      "quantity": 1,
+      "_id": {
+        "$oid": "668a3e5491ea867bb3bb9852"
+      }
+    }
+  ],
+  "totalPrice": 16,
+  "orderTime": {
+    "$date": "2024-07-07T07:05:56.225Z"
+  },
+  "__v": 0
+}]

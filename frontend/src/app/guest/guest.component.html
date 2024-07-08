@@ -1,39 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Kutak dobre hrane</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" (click)="navigateTo(1)">Profile</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" (click)="navigateTo(2)">Restaurants</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" (click)="navigateTo(3)">Reservations</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" (click)="navigateTo(4)">Food delivery</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" (click)="logout()">Log out</a>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" (click)="navigateTo(1)">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="navigateTo(2)">Restaurants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="navigateTo(3)">Reservations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="navigateTo(4)">Food delivery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()">Log out</a>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 <div class="container">
   
     <div *ngIf="page == 1">
       <h3>Profile</h3><br>
+        <img src="{{ user.profilePicture }}" alt="User" style="width: 100px; height: 100px;">
+        <br>
+        <input type="file" (change)="setPicture($event)">
+        <br>
 
         Forename:<br>
         <input type="text" name="forename" placeholder="Forename" [(ngModel)]="user.forename">
@@ -59,49 +65,52 @@
     </div>
 
     <div *ngIf="page == 2">
-        <h3>Restaurants</h3><br>
-
-        <div>
-          <label>
-            Name:
-            <input type="text" [(ngModel)]="searchName" />
-          </label>
-          <label>
-            Address:
-            <input type="text" [(ngModel)]="searchAddress" />
-          </label>
-          <label>
-            Type:
-            <input type="text" [(ngModel)]="searchType" />
-          </label>
-        </div>
+        <div class="container">
+          <h3>Restaurants</h3><br>
       
-        <table>
-          <thead>
-            <tr>
-              <th (click)="setSort('name')">Name</th>
-              <th (click)="setSort('address')">Address</th>
-              <th (click)="setSort('type')">Type</th>
-              <th>Workers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let restaurant of sortedAndFilteredRestaurants">
-              <td (click)="restaurantDetails(restaurant)">{{ restaurant.name }}</td>
-              <td>{{ restaurant.address }}</td>
-              <td>{{ restaurant.type }}</td>
-              <td>
-                <ul>
-                  <div *ngFor="let waiter of waiters">
-                    <div *ngIf="waiter.worksAt == restaurant.name">
-                      {{waiter.forename}} {{waiter.surname}}
-                    </div>
-                  </div>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <label for="searchName">Name:</label>
+                  <input type="text" class="form-control" id="searchName" [(ngModel)]="searchName" />
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="searchAddress">Address:</label>
+                  <input type="text" class="form-control" id="searchAddress" [(ngModel)]="searchAddress" />
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="searchType">Type:</label>
+                  <input type="text" class="form-control" id="searchType" [(ngModel)]="searchType" />
+              </div>
+          </div>
+          
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th (click)="setSort('name')">Name</th>
+                      <th (click)="setSort('address')">Address</th>
+                      <th (click)="setSort('type')">Type</th>
+                      <th>Workers</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let restaurant of sortedAndFilteredRestaurants">
+                      <td (click)="restaurantDetails(restaurant)">{{ restaurant.name }}</td>
+                      <td>{{ restaurant.address }}</td>
+                      <td>{{ restaurant.type }}</td>
+                      <td>
+                          <ul class="list-unstyled">
+                              <div *ngFor="let waiter of waiters">
+                                  <div *ngIf="waiter.worksAt == restaurant.name">
+                                      {{waiter.forename}} {{waiter.surname}}
+                                  </div>
+                              </div>
+                          </ul>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    
     </div>
 
     <div *ngIf="page == 3">
@@ -118,7 +127,6 @@
               <th>Date</th>
               <th>Time</th>
               <th>Additional Requests</th>
-              <th>Cancel Reservation</th>
           </tr>
           <tr *ngFor="let reservation of activeReservations">
               <td>
@@ -136,19 +144,19 @@
               <td>
                   <p>{{reservation.additionalRequests}}</p>
               </td>
-              <td><!--
+              <!--<td>
                 <ng-template [ngIf]="!isCancelButtonDisabled(reservation)">
                   <button (click)="cancelReservation(reservation)" [disabled]="isCancelButtonDisabled(reservation)">Cancel</button>
                 </ng-template>-->
-                <ng-template [ngIf]="alreadyCancelled(reservation)">
+                <!--<ng-template [ngIf]="alreadyCancelled(reservation)">
                   <p>Reservation already cancelled</p>
-                </ng-template>
+                </ng-template>-->
                 <!--
                 <ng-template [ngIf]="tooCloseToCancel(reservation)">
                   <p>Reservation too close to cancel</p>
                 </ng-template>
-                -->
-              </td>
+                
+              </td>-->
           </tr>
         </table>
       </div>

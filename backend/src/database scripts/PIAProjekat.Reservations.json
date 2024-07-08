@@ -1,0 +1,178 @@
+[{
+  "_id": {
+    "$oid": "668a3319f9a3d9dc69124cd9"
+  },
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "tableId": null,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-08T08:00:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-08T11:00:00.000Z"
+  },
+  "numberOfPeople": 2,
+  "additionalRequests": "nista",
+  "showedUp": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a333df9a3d9dc69124d1b"
+  },
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "tableId": 2,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-10T10:18:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-10T13:18:00.000Z"
+  },
+  "numberOfPeople": 3,
+  "additionalRequests": "veliki sto",
+  "showedUp": 0,
+  "__v": 0,
+  "confirmedByWaiter": "waiter2"
+},
+{
+  "_id": {
+    "$oid": "668a370ff9a3d9dc69124edc"
+  },
+  "username": "nikola",
+  "restaurantName": "Milky",
+  "tableId": null,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-13T12:34:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-13T15:34:00.000Z"
+  },
+  "numberOfPeople": 3,
+  "additionalRequests": "ne",
+  "showedUp": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a379cf9a3d9dc6912515e"
+  },
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "tableId": 1,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-01T09:36:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-01T12:36:00.000Z"
+  },
+  "numberOfPeople": 3,
+  "additionalRequests": "piksla",
+  "showedUp": 1,
+  "__v": 0,
+  "confirmedByWaiter": "waiter1"
+},
+{
+  "_id": {
+    "$oid": "668a38cbf7b4fba6992cec6d"
+  },
+  "username": "nikola",
+  "restaurantName": "Poncho",
+  "tableId": null,
+  "confirmedByWaiter": "",
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-12T11:42:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-12T14:42:00.000Z"
+  },
+  "numberOfPeople": 1,
+  "additionalRequests": ".",
+  "showedUp": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a3dd391ea867bb3bb97d8"
+  },
+  "username": "user2",
+  "restaurantName": "Richard Gyros",
+  "tableId": null,
+  "confirmedByWaiter": "",
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-10T09:03:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-10T12:03:00.000Z"
+  },
+  "numberOfPeople": 2,
+  "additionalRequests": "ne",
+  "showedUp": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a3e01fd0b7006f6cf60b6"
+  },
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "tableId": 2,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-07-01T09:36:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-07-01T12:36:00.000Z"
+  },
+  "numberOfPeople": 3,
+  "additionalRequests": "piksla2",
+  "showedUp": 1,
+  "__v": 0,
+  "confirmedByWaiter": "waiter2"
+},
+{
+  "_id": {
+    "$oid": "668a40a3fd0b7006f6cf60bd"
+  },
+  "username": "nikola",
+  "restaurantName": "Richard Gyros",
+  "tableId": 1,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2024-06-04T09:36:00.000Z"
+  },
+  "endTime": {
+    "$date": "2024-06-04T12:36:00.000Z"
+  },
+  "numberOfPeople": 2,
+  "additionalRequests": "piksla5",
+  "showedUp": 1,
+  "__v": 0,
+  "confirmedByWaiter": "waiter2"
+},
+{
+  "_id": {
+    "$oid": "668a40cefd0b7006f6cf60be"
+  },
+  "username": "user2",
+  "restaurantName": "Richard Gyros",
+  "tableId": 2,
+  "cancelledByWaiter": false,
+  "startTime": {
+    "$date": "2023-06-04T09:36:00.000Z"
+  },
+  "endTime": {
+    "$date": "2023-06-04T12:36:00.000Z"
+  },
+  "numberOfPeople": 2,
+  "additionalRequests": "piksla6",
+  "showedUp": 1,
+  "__v": 0,
+  "confirmedByWaiter": "waiter1"
+}]

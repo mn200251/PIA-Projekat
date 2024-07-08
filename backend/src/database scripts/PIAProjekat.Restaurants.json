@@ -1,0 +1,548 @@
+[{
+  "_id": {
+    "$oid": "668a2a0df9a3d9dc69124445"
+  },
+  "name": "Richard Gyros",
+  "type": "Fast Food",
+  "address": "Kod faksa",
+  "description": "Mnogo dobar giros!",
+  "contactPerson": "555333",
+  "layout": {
+    "tables": [
+      {
+        "id": 1,
+        "x": 60,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 6,
+        "_id": {
+          "$oid": "668a2a0df9a3d9dc69124447"
+        }
+      },
+      {
+        "id": 2,
+        "x": 160,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 6,
+        "_id": {
+          "$oid": "668a2a0df9a3d9dc69124448"
+        }
+      },
+      {
+        "id": 3,
+        "x": 260,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 6,
+        "_id": {
+          "$oid": "668a2a0df9a3d9dc69124449"
+        }
+      },
+      {
+        "id": 4,
+        "x": 360,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 6,
+        "_id": {
+          "$oid": "668a2a0df9a3d9dc6912444a"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "id": 1,
+        "x": 400,
+        "y": 60,
+        "width": 150,
+        "height": 150,
+        "_id": {
+          "$oid": "668a2a0df9a3d9dc6912444b"
+        }
+      }
+    ],
+    "toilets": [
+      {
+        "id": 1,
+        "x": 150,
+        "y": 100,
+        "width": 100,
+        "height": 150,
+        "_id": {
+          "$oid": "668a2a0df9a3d9dc6912444c"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "668a2a0df9a3d9dc69124446"
+    }
+  },
+  "workingHours": [
+    {
+      "day": "Monday",
+      "open": "10:00",
+      "close": "19:00",
+      "_id": {
+        "$oid": "668a2a0df9a3d9dc6912444d"
+      }
+    },
+    {
+      "day": "Wednesday",
+      "open": "11:00",
+      "close": "20:00",
+      "_id": {
+        "$oid": "668a2a0df9a3d9dc6912444e"
+      }
+    },
+    {
+      "day": "Friday",
+      "open": "13:15",
+      "close": "17:00",
+      "_id": {
+        "$oid": "668a2a0df9a3d9dc6912444f"
+      }
+    }
+  ],
+  "menu": [
+    {
+      "name": "Gyros XXL",
+      "price": 7,
+      "imageLink": "giros1.jpg",
+      "ingredients": "pilece meso, pomfrit, tzatziki, kecap",
+      "_id": {
+        "$oid": "668a301ff9a3d9dc691244fc"
+      }
+    },
+    {
+      "name": "Rich Bitch",
+      "price": 10,
+      "imageLink": "giros2",
+      "ingredients": "4 lepinje, 300g pileceg mesa, pomfrit...",
+      "_id": {
+        "$oid": "668a3045f9a3d9dc69124532"
+      }
+    },
+    {
+      "name": "Pepsi MAX",
+      "price": 2,
+      "imageLink": "giros3",
+      "ingredients": "/",
+      "_id": {
+        "$oid": "668a3059f9a3d9dc6912456a"
+      }
+    }
+  ],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "668a2b4ff9a3d9dc6912445c"
+  },
+  "name": "Poncho",
+  "type": "Burger",
+  "address": "Kod masinca",
+  "description": "Mnogo kul mesto",
+  "contactPerson": "063664",
+  "layout": {
+    "tables": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 50,
+        "radius": 20,
+        "maxPeople": 4,
+        "_id": {
+          "$oid": "668a2b4ff9a3d9dc6912445e"
+        }
+      },
+      {
+        "id": 2,
+        "x": 150,
+        "y": 50,
+        "radius": 20,
+        "maxPeople": 4,
+        "_id": {
+          "$oid": "668a2b4ff9a3d9dc6912445f"
+        }
+      },
+      {
+        "id": 3,
+        "x": 250,
+        "y": 50,
+        "radius": 20,
+        "maxPeople": 4,
+        "_id": {
+          "$oid": "668a2b4ff9a3d9dc69124460"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "id": 1,
+        "x": 0,
+        "y": 150,
+        "width": 100,
+        "height": 100,
+        "_id": {
+          "$oid": "668a2b4ff9a3d9dc69124461"
+        }
+      }
+    ],
+    "toilets": [
+      {
+        "id": 1,
+        "x": 200,
+        "y": 150,
+        "width": 100,
+        "height": 100,
+        "_id": {
+          "$oid": "668a2b4ff9a3d9dc69124462"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "668a2b4ff9a3d9dc6912445d"
+    }
+  },
+  "workingHours": [
+    {
+      "day": "Monday",
+      "open": "12:00",
+      "close": "21:00",
+      "_id": {
+        "$oid": "668a2b4ff9a3d9dc69124463"
+      }
+    },
+    {
+      "day": "Tuesday",
+      "open": "08:00",
+      "close": "20:00",
+      "_id": {
+        "$oid": "668a2b4ff9a3d9dc69124464"
+      }
+    },
+    {
+      "day": "Wednesday",
+      "open": "11:00",
+      "close": "20:00",
+      "_id": {
+        "$oid": "668a2b4ff9a3d9dc69124465"
+      }
+    },
+    {
+      "day": "Thursday",
+      "open": "14:30",
+      "close": "22:00",
+      "_id": {
+        "$oid": "668a2b4ff9a3d9dc69124466"
+      }
+    },
+    {
+      "day": "Friday",
+      "open": "13:00",
+      "close": "18:00",
+      "_id": {
+        "$oid": "668a2b4ff9a3d9dc69124467"
+      }
+    }
+  ],
+  "menu": [
+    {
+      "name": "Pljeskavica",
+      "price": 5,
+      "imageLink": "poncho1.jpg",
+      "ingredients": "150g mesa, lepinja, pavlaka",
+      "_id": {
+        "$oid": "668a3079f9a3d9dc691245a2"
+      }
+    },
+    {
+      "name": "Cevapi",
+      "price": 7,
+      "imageLink": "poncho2.jpg",
+      "ingredients": "200g cevapa",
+      "_id": {
+        "$oid": "668a30a4f9a3d9dc691245dc"
+      }
+    },
+    {
+      "name": "Sendvic",
+      "price": 4,
+      "imageLink": "poncho3.jpg",
+      "ingredients": "zemicka, sunka, sir, kecap",
+      "_id": {
+        "$oid": "668a30e6f9a3d9dc69124618"
+      }
+    }
+  ],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "668a2e48f9a3d9dc69124493"
+  },
+  "name": "Milky",
+  "type": "Slatko",
+  "address": "Novi Beograd",
+  "description": "Mnogo slatke palacinke",
+  "contactPerson": "324423",
+  "layout": {
+    "tables": [
+      {
+        "id": 1,
+        "x": 60,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 6,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc69124495"
+        }
+      },
+      {
+        "id": 2,
+        "x": 160,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 2,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc69124496"
+        }
+      },
+      {
+        "id": 3,
+        "x": 260,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 3,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc69124497"
+        }
+      },
+      {
+        "id": 4,
+        "x": 360,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 3,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc69124498"
+        }
+      },
+      {
+        "id": 5,
+        "x": 380,
+        "y": 230,
+        "radius": 25,
+        "maxPeople": 2,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc69124499"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "id": 1,
+        "x": 400,
+        "y": 60,
+        "width": 150,
+        "height": 150,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc6912449a"
+        }
+      }
+    ],
+    "toilets": [
+      {
+        "id": 1,
+        "x": 150,
+        "y": 100,
+        "width": 100,
+        "height": 150,
+        "_id": {
+          "$oid": "668a2e48f9a3d9dc6912449b"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "668a2e48f9a3d9dc69124494"
+    }
+  },
+  "workingHours": [
+    {
+      "day": "Saturday",
+      "open": "11:30",
+      "close": "19:00",
+      "_id": {
+        "$oid": "668a2e48f9a3d9dc6912449c"
+      }
+    },
+    {
+      "day": "Sunday",
+      "open": "12:00",
+      "close": "18:00",
+      "_id": {
+        "$oid": "668a2e48f9a3d9dc6912449d"
+      }
+    }
+  ],
+  "menu": [
+    {
+      "name": "Palacinka sa eurokremom",
+      "price": 12,
+      "imageLink": "milky1.jpg",
+      "ingredients": "palacinka sa eurokremom",
+      "_id": {
+        "$oid": "668a3105f9a3d9dc69124652"
+      }
+    },
+    {
+      "name": "Palacinka sa plazmom",
+      "price": 15,
+      "imageLink": "milky2.jpg",
+      "ingredients": "Palacinka sa plazmom",
+      "_id": {
+        "$oid": "668a3125f9a3d9dc6912468e"
+      }
+    }
+  ],
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "668a2fd8f9a3d9dc691244bd"
+  },
+  "name": "Halo Leskovac",
+  "type": "Fast Food",
+  "address": "U centru",
+  "description": "Mnogo dobra becka",
+  "contactPerson": "0633425",
+  "layout": {
+    "tables": [
+      {
+        "id": 1,
+        "x": 30,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 6,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244bf"
+        }
+      },
+      {
+        "id": 2,
+        "x": 130,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 2,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244c0"
+        }
+      },
+      {
+        "id": 3,
+        "x": 230,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 3,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244c1"
+        }
+      },
+      {
+        "id": 4,
+        "x": 330,
+        "y": 60,
+        "radius": 25,
+        "maxPeople": 3,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244c2"
+        }
+      },
+      {
+        "id": 5,
+        "x": 380,
+        "y": 230,
+        "radius": 25,
+        "maxPeople": 2,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244c3"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "id": 1,
+        "x": 400,
+        "y": 60,
+        "width": 150,
+        "height": 150,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244c4"
+        }
+      }
+    ],
+    "toilets": [
+      {
+        "id": 1,
+        "x": 150,
+        "y": 100,
+        "width": 100,
+        "height": 150,
+        "_id": {
+          "$oid": "668a2fd8f9a3d9dc691244c5"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "668a2fd8f9a3d9dc691244be"
+    }
+  },
+  "workingHours": [
+    {
+      "day": "Wednesday",
+      "open": "10:00",
+      "close": "17:00",
+      "_id": {
+        "$oid": "668a2fd8f9a3d9dc691244c6"
+      }
+    },
+    {
+      "day": "Friday",
+      "open": "13:00",
+      "close": "22:00",
+      "_id": {
+        "$oid": "668a2fd8f9a3d9dc691244c7"
+      }
+    },
+    {
+      "day": "Sunday",
+      "open": "11:30",
+      "close": "20:00",
+      "_id": {
+        "$oid": "668a2fd8f9a3d9dc691244c8"
+      }
+    }
+  ],
+  "menu": [
+    {
+      "name": "Becka snicla",
+      "price": 4,
+      "imageLink": "halo1.jpg",
+      "ingredients": "200g becka snicla, hleb",
+      "_id": {
+        "$oid": "668a3152f9a3d9dc691246cb"
+      }
+    },
+    {
+      "name": "slika test",
+      "price": 3,
+      "imageLink": "http://localhost:4000/images/1720353958935-vlah.jpg",
+      "ingredients": "test1, test2",
+      "_id": {
+        "$oid": "668a84ac6fb7d69a4b16f186"
+      }
+    }
+  ],
+  "__v": 2
+}]

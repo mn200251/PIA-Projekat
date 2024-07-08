@@ -3,6 +3,8 @@ import Restaurant from "../models/Restaurant";
 import User from "../models/User";
 import Reservation from "../models/Reservation";
 import Order from "../models/Order";
+import * as crypto from "crypto";
+
 const router = express.Router();
 
 
@@ -60,9 +62,11 @@ export class RestaurantController {
       if (existingUser)
         return res.json({ msg: 'User already exists!' });
 
+      const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+
       const newUser = new User({
         username,
-        password,
+        hashedPassword,
         forename,
         surname,
         sex,
@@ -312,7 +316,7 @@ export class RestaurantController {
         let totalPrice = req.body.totalPrice;
         let orderTime =  req.body.orderTime;
         
-        const lastOrder = await Order.findOne().sort({ _id: -1 }).limit(1);
+        const lastOrder = await Order.findOne().sort({ id: -1 }).limit(1);
         const newOrderId = lastOrder ? lastOrder.id + 1 : 1;
     
         const newOrder = new Order(
@@ -343,7 +347,7 @@ export class RestaurantController {
 
         order.estimatedTime = estimatedTime;
         order.status = status;
-        
+
         await order.save();
         return res.json({ msg: 'Success!' });
     }

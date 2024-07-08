@@ -9,7 +9,7 @@ export interface Reservation {
     numberOfPeople: number;
     additionalRequests: string;
 
-    confirmedByWaiter: string ;
+    confirmedByWaiter: string;
     // cancelledByUser: boolean;
     cancelledByWaiter: boolean;
     showedUp: number;

@@ -41,6 +41,7 @@ const Restaurant_1 = __importDefault(require("../models/Restaurant"));
 const User_1 = __importDefault(require("../models/User"));
 const Reservation_1 = __importDefault(require("../models/Reservation"));
 const Order_1 = __importDefault(require("../models/Order"));
+const crypto = __importStar(require("crypto"));
 const router = express.Router();
 class RestaurantController {
     constructor() {
@@ -85,9 +86,10 @@ class RestaurantController {
             const existingUser = yield User_1.default.findOne({ $or: [{ username: newWaiter.username }, { email: newWaiter.email }] });
             if (existingUser)
                 return res.json({ msg: 'User already exists!' });
+            const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
             const newUser = new User_1.default({
                 username,
-                password,
+                hashedPassword,
                 forename,
                 surname,
                 sex,
@@ -283,7 +285,7 @@ class RestaurantController {
             let items = req.body.items;
             let totalPrice = req.body.totalPrice;
             let orderTime = req.body.orderTime;
-            const lastOrder = yield Order_1.default.findOne().sort({ _id: -1 }).limit(1);
+            const lastOrder = yield Order_1.default.findOne().sort({ id: -1 }).limit(1);
             const newOrderId = lastOrder ? lastOrder.id + 1 : 1;
             const newOrder = new Order_1.default({ id: newOrderId,
                 username,

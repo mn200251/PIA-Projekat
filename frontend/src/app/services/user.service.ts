@@ -20,6 +20,14 @@ export class UserService {
     return this.http.post<User>('http://localhost:4000/users/login', data);
   }
 
+  uploadPicture(formData: FormData) {
+    const data ={
+      formData: formData
+    }
+
+    return this.http.post<string>('http://localhost:4000/users/uploadPicture', formData);
+  }
+
   register(
     username: string,
     password: string,
@@ -32,7 +40,7 @@ export class UserService {
     contactPhone: number,
     securityQuestion: string,
     securityAnswer: string,
-    // profilePicure: any,
+    profilePicture: string,
     creditCardNumber: number)
   {
     const data= {
@@ -47,10 +55,9 @@ export class UserService {
       contactPhone: contactPhone,
       securityQuestion: securityQuestion,
       securityAnswer: securityAnswer,
-      // profilePicure: profilePicure,
+      profilePicture: profilePicture,
       creditCardNumber: creditCardNumber,
     }
-
     return this.http.post<string>('http://localhost:4000/users/register', data);
   }
 
@@ -61,7 +68,7 @@ export class UserService {
     address: string,
     email: string,
     contactPhone: number,
-    // profilePicure: any,
+    profilePicture: any,
     creditCardNumber: number)
   {
     const data= {
@@ -71,7 +78,7 @@ export class UserService {
       address: address,
       email: email,
       contactPhone: contactPhone,
-      // profilePicure: profilePicure,
+      profilePicture: profilePicture,
       creditCardNumber: creditCardNumber,
     }
 

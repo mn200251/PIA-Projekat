@@ -1,0 +1,413 @@
+[{
+  "_id": {
+    "$oid": "668a233c892d70591dab6506"
+  },
+  "username": "nikola",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/1720354319621-vlah.jpg",
+  "creditCardNumber": 456456464,
+  "accountStatus": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a233c892d70591dab6507"
+  },
+  "username": "admin",
+  "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "admin",
+  "address": "Sase Simeunovica 24",
+  "email": "admin",
+  "contactPhone": 123,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 456456464,
+  "accountStatus": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a253bf9a3d9dc69124412"
+  },
+  "username": "banovan",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Banovan",
+  "surname": "User",
+  "sex": "M",
+  "type": "guest",
+  "address": "1115 8th Avenue",
+  "email": "banovan@gmail.com",
+  "contactPhone": 697,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 654654,
+  "accountStatus": -2,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a2577f9a3d9dc69124415"
+  },
+  "username": "user2",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Filip",
+  "surname": "Matic",
+  "sex": "M",
+  "type": "guest",
+  "address": "1134 9th Avenue",
+  "email": "filip@gmail.com",
+  "contactPhone": 64151435,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": {
+    "$numberLong": "65445646456"
+  },
+  "accountStatus": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a25a2f9a3d9dc69124418"
+  },
+  "username": "user3",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Marko",
+  "surname": "Markovic",
+  "sex": "M",
+  "type": "guest",
+  "address": "ETF",
+  "email": "marko@gmail.com",
+  "contactPhone": 453563534,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 645546456,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a319bf9a3d9dc6912473d"
+  },
+  "username": "waiter1",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Jelica",
+  "surname": "Cincovic",
+  "sex": "F",
+  "type": "waiter",
+  "address": "Neka adresa",
+  "email": "jelica@gmail.com",
+  "contactPhone": 465363,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "creditCardNumber": {
+    "$numberLong": "6576575897"
+  },
+  "accountStatus": 1,
+  "worksAt": "Richard Gyros",
+  "__v": 0,
+  "profilePicture": "http://localhost:4000/images/default.jpg"
+},
+{
+  "_id": {
+    "$oid": "668a31e1f9a3d9dc6912477e"
+  },
+  "username": "waiter2",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Sanja",
+  "surname": "Radosavljevic",
+  "sex": "F",
+  "type": "waiter",
+  "address": "Tosin Bunar",
+  "email": "sanja@gmail.com",
+  "contactPhone": 346343463,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "creditCardNumber": 34636363,
+  "accountStatus": 1,
+  "worksAt": "Richard Gyros",
+  "__v": 0,
+  "profilePicture": "http://localhost:4000/images/default.jpg"
+},
+{
+  "_id": {
+    "$oid": "668a325af9a3d9dc691247cf"
+  },
+  "username": "waiter3",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Filip",
+  "surname": "Cubric",
+  "sex": "M",
+  "type": "waiter",
+  "address": "Mirka Milojkovica 15",
+  "email": "waiter3@gmail.com",
+  "contactPhone": 362346236,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "creditCardNumber": 546454564,
+  "accountStatus": 1,
+  "worksAt": "Poncho",
+  "__v": 0,
+  "profilePicture": "http://localhost:4000/images/default.jpg"
+},
+{
+  "_id": {
+    "$oid": "668a614491ea867bb3bba532"
+  },
+  "username": "amela",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Amela",
+  "surname": "kadric",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola45252552.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": {
+    "$numberLong": "52352352352352"
+  },
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a62e83a06eb9b52553d3d"
+  },
+  "username": "amela3",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Amela",
+  "surname": "Amelic",
+  "sex": "F",
+  "type": "guest",
+  "address": "Sase Simeunovica 24, 171",
+  "email": "starlit435st53453yleshop@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 4242,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a70053a06eb9b52555daa"
+  },
+  "username": "Amela3",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nik23432423ola.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 453534,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a70af32f61b2ffa966bc4"
+  },
+  "username": "Amela4",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirkovic",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24, 171",
+  "email": "starlitst54335345yleshop@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 54353453,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a71af5ea03b29f15c9052"
+  },
+  "username": "amela6",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola.m4525235425irkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 646464,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a725ca966ba7fd0747c20"
+  },
+  "username": "AmelaFinale",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola.32424324mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 424233453,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a73f470bf81620e8e1ae1"
+  },
+  "username": "amelafinale2",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola.3mirk535235235ovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": {
+    "$numberLong": "53454353453"
+  },
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a749370bf81620e8e1ba8"
+  },
+  "username": "Amela14",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nik534534543ola.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 53453453,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a74c170bf81620e8e1bab"
+  },
+  "username": "Amela17",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nik54354353la.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": {
+    "$numberLong": "43535435534"
+  },
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a76a2e6794daa2213d95a"
+  },
+  "username": "Amela20",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola.54354353453mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 43543534,
+  "accountStatus": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a76bce6794daa2213d95d"
+  },
+  "username": "Amela21",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "niko34242342la.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 324,
+  "accountStatus": 1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668a771a2970e2b42e89beee"
+  },
+  "username": "Amela22",
+  "password": "fe0162bd80980ca1216695d73b0e39b79bea446db134a9fc72001a7945da5ece",
+  "forename": "Nikola",
+  "surname": "Mirković",
+  "sex": "M",
+  "type": "guest",
+  "address": "Sase Simeunovica 24",
+  "email": "nikola45345226.mirkovic.bg@gmail.com",
+  "contactPhone": 69738850,
+  "securityQuestion": "aa",
+  "securityAnswer": "bb",
+  "profilePicture": "http://localhost:4000/images/default.jpg",
+  "creditCardNumber": 3242,
+  "accountStatus": 1,
+  "__v": 0
+}]

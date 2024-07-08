@@ -36,4 +36,7 @@ userRouter
 userRouter
     .route("/cancelReservation")
     .post((req, res) => new UserController_1.UserController().cancelReservation(req, res));
+userRouter
+    .route("/uploadPicture")
+    .post((req, res) => new UserController_1.UserController().uploadPicture(req, res));
 exports.default = userRouter;
